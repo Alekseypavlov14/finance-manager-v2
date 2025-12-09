@@ -1,3 +1,6 @@
-// default settings values
-export const defaultDisplayTransactionsComments = true
-export const defaultDisplayTransactionsAmount = 100
+import type { Settings } from './types/settings'
+
+export const defaultSettings: Settings = {
+  displayTransactionsComments: true,
+  displayTransactionsAmount: 100,
+}

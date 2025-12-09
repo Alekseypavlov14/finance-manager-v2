@@ -1,10 +1,9 @@
-import { defaultDisplayTransactionsAmount, defaultDisplayTransactionsComments } from './constants'
+import { settingsLocalStorage } from './settings.storage'
+import { defaultSettings } from './constants'
+import type { Settings } from './types/settings'
 import { create } from 'zustand'
 
-export interface SettingsState {
-  displayTransactionsComments: boolean
-  displayTransactionsAmount: number
-}
+export interface SettingsState extends Settings {}
 
 export interface SettingsActions {
   updateDisplayTransactionsComments: (displayTransactionsComments: boolean) => void
@@ -14,8 +13,7 @@ export interface SettingsActions {
 export interface SettingsStore extends SettingsState, SettingsActions {}
 
 export const useSettingsStore = create<SettingsStore>(set => ({
-  displayTransactionsComments: defaultDisplayTransactionsComments,
-  displayTransactionsAmount: defaultDisplayTransactionsAmount,
+  ...(settingsLocalStorage.getValue() ?? defaultSettings),
 
   updateDisplayTransactionsComments: (displayTransactionsComments) => set(state => ({ ...state, displayTransactionsComments })),
   updateDisplayTransactionsAmount: (displayTransactionsAmount) => set(state => ({ ...state, displayTransactionsAmount })),
