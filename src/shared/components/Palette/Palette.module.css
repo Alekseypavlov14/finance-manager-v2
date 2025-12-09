@@ -1,0 +1,4 @@
+.Palette {
+  background-color: var(--white);
+  box-shadow: var(--shadow-accent);
+}
