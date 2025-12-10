@@ -1,13 +1,13 @@
 import { create } from 'zustand'
-import type { CurrentEntity } from './currency.entity'
+import type { CurrencyEntity } from './currency.entity'
 import { currenciesLocalStorage } from './currencies.storage'
 
 export interface CurrenciesState {
-  currencies: CurrentEntity[]
+  currencies: CurrencyEntity[]
 }
 
 export interface CurrenciesActions {
-  updateCurrencies: (currencies: CurrentEntity[]) => void
+  updateCurrencies: (currencies: CurrencyEntity[]) => void
 }
 
 export interface CurrenciesStore extends CurrenciesState, CurrenciesActions {}
