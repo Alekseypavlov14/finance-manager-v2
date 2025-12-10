@@ -22,12 +22,19 @@ export function useTransactionActions() {
 
     const newTransaction: TransactionEntity = { id, ...data }
 
-    const newTransactions = transactions.concat([ newTransaction ])
+    const oldTransactions = transactions.filter(transaction => transaction.id !== id)
+    const newTransactions = oldTransactions.concat([ newTransaction ])
+    updateTransactions(newTransactions)
+  }
+
+  function deleteTransaction(id: Id) {
+    const newTransactions = transactions.filter(transaction => transaction.id !== id)
     updateTransactions(newTransactions)
   }
 
   return ({
     createTransaction,
     updateTransaction,
+    deleteTransaction,
   })
 }

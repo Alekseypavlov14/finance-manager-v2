@@ -7,6 +7,25 @@ import { Palette } from '@/shared/components/Palette'
 import { Header } from '@/shared/components/Header'
 import { Page } from '@/shared/components/Page'
 import { Main } from '@/shared/components/Main'
+import { UpdateTransactionForm } from '@/features/modify-transaction/setups/UpdateTransactionForm'
+import type { TransactionEntity } from '@/entities/transactions'
+
+const transaction: TransactionEntity = {
+  id: 0,
+  
+  type: 'deposit',
+  description: '',
+
+  received: {
+    amount: 10,
+    currencyId: 1,
+  },
+  lost: {
+    amount: 20,
+    currencyId: 2,
+  },
+  date: Date.now()
+}
 
 export function HomePage() {
   return (
@@ -24,6 +43,8 @@ export function HomePage() {
 
             <Palette block round>
               <CreateTransactionForm />
+
+              <UpdateTransactionForm transaction={transaction} />
             </Palette>
           </Container>
         </Main>
