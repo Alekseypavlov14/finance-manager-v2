@@ -1,4 +1,4 @@
 import { LocalStorage } from '@oleksii-pavlov/storages'
-import type { CurrentEntity } from './currency.entity'
+import type { CurrencyEntity } from './currency.entity'
 
-export const currenciesLocalStorage = new LocalStorage<CurrentEntity[]>('entities/currents')
+export const currenciesLocalStorage = new LocalStorage<CurrencyEntity[]>('entities/currents')

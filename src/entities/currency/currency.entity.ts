@@ -4,4 +4,4 @@ export interface CurrencyData {
   label: string
 } 
 
-export interface CurrentEntity extends Entity, CurrencyData {}
+export interface CurrencyEntity extends Entity, CurrencyData {}
