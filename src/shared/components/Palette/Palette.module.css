@@ -2,3 +2,11 @@
   background-color: var(--white);
   box-shadow: var(--shadow-accent);
 }
+
+.Block {
+  padding: 20px;
+}
+
+.Round {
+  border-radius: 10px;
+}
