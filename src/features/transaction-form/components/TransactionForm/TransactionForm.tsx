@@ -10,6 +10,7 @@ import { FieldLabel } from '@/shared/components/FieldLabel'
 import { Field } from '@/shared/components/Field'
 import { Form } from '@/shared/components/Form'
 import dayjs from 'dayjs'
+import styles from './TransactionForm.module.css'
 
 interface TransactionFormProps {
   initialTransactionData: TransactionData
@@ -75,6 +76,7 @@ export function TransactionForm({
               options={currencyOptions}
               value={transactionReceived.currencyId}
               onChange={updateTransactionReceivedCurrencyId}
+              className={styles.CurrencySelect}
             />        
           </FieldColumn>
         </Field>
@@ -94,6 +96,7 @@ export function TransactionForm({
               options={currencyOptions}
               value={transactionLost.currencyId}
               onChange={updateTransactionLostCurrencyId}
+              className={styles.CurrencySelect}
             />
           </FieldColumn>
         </Field>

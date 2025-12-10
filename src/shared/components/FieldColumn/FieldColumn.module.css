@@ -3,3 +3,7 @@
   align-items: center;
   gap: 20px;
 }
+
+.FieldColumn > * {
+  flex: 1 1 auto;
+}
