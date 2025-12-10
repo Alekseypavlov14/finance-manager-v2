@@ -1,10 +1,11 @@
 import { transactionDateSelector, transactionDescriptionSelector, transactionLostSelector, transactionReceivedSelector, transactionTypeSelector, updateTransactionDateSelector, updateTransactionDescriptionSelector, updateTransactionLostSelector, updateTransactionReceivedSelector, updateTransactionTypeSelector, useTransactionFormStore } from '../../transaction-form.store'
-import { losingTransactionTypes, receivingTransactionTypes, type TransactionData } from '@/entities/transactions'
+import { losingTransactionTypes, receivingTransactionTypes, transactionTypes, type TransactionData } from '@/entities/transactions'
 import { currenciesSelector, useCurrenciesStore } from '@/entities/currency'
 import { convertDayjsToMilliseconds } from '@/shared/utils/datetime'
 import { DatePicker, Input, Select } from 'antd'
 import type { Option } from '@/shared/types/option'
 import type { Id } from '@/shared/types/entity'
+import { FieldColumn } from '@/shared/components/FieldColumn'
 import { FieldLabel } from '@/shared/components/FieldLabel'
 import { Field } from '@/shared/components/Field'
 import { Form } from '@/shared/components/Form'
@@ -29,6 +30,8 @@ export function TransactionForm({
   const updateTransactionLost = useTransactionFormStore(updateTransactionLostSelector)
   const updateTransactionDate = useTransactionFormStore(updateTransactionDateSelector)
 
+  const transactionTypeOptions = transactionTypes.map<Option<string>>(transactionType => ({ label: transactionType, value: transactionType }))
+
   const currencies = useCurrenciesStore(currenciesSelector)
   const currencyOptions = currencies.map<Option<Id>>(currency => ({ label: currency.label, value: currency.id }))
 
@@ -50,27 +53,49 @@ export function TransactionForm({
     <Form>
       <Field>
         <FieldLabel>Transaction type:</FieldLabel>
+
+        <Select 
+          options={transactionTypeOptions}
+          value={transactionType}
+          onChange={updateTransactionType}
+        />
       </Field>
 
       {receivingTransactionTypes.includes(transactionType) ? (
         <Field>
           <FieldLabel>Received:</FieldLabel>
-          <Select 
-            options={currencyOptions}
-            value={transactionReceived.currencyId}
-            onChange={updateTransactionReceivedCurrencyId}
-          />        
+
+          <FieldColumn>
+            <Input 
+              value={transactionReceived.amount}
+              onChange={(e) => updateTransactionReceivedAmount(parseFloat(e.target.value))}
+            />
+
+            <Select 
+              options={currencyOptions}
+              value={transactionReceived.currencyId}
+              onChange={updateTransactionReceivedCurrencyId}
+            />        
+          </FieldColumn>
         </Field>
       ) : null}
 
       {losingTransactionTypes.includes(transactionType) ? (
         <Field>
           <FieldLabel>Lost:</FieldLabel>
-          <Select 
-            options={currencyOptions}
-            value={transactionLost.currencyId}
-            onChange={updateTransactionLostCurrencyId}
-          />
+
+          <FieldColumn>
+            <Input 
+              value={transactionLost.amount}
+              onChange={(e) => updateTransactionLostAmount(parseFloat(e.target.value))}
+            />
+
+            <Select 
+              options={currencyOptions}
+              value={transactionLost.currencyId}
+              onChange={updateTransactionLostCurrencyId}
+            />
+          </FieldColumn>
         </Field>
       ) : null}
       

@@ -6,5 +6,11 @@ export const transactionTypeExchange: TransactionType = 'exchange'
 
 export const defaultTransactionType = transactionTypeWithdraw
 
+export const transactionTypes = [
+  transactionTypeWithdraw,
+  transactionTypeDeposit,
+  transactionTypeExchange,
+]
+
 export const receivingTransactionTypes: TransactionType[] = [ transactionTypeDeposit, transactionTypeExchange ]
 export const losingTransactionTypes: TransactionType[] = [ transactionTypeWithdraw, transactionTypeExchange ]

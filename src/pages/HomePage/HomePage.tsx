@@ -5,6 +5,7 @@ import { Wrapper } from '@/shared/components/Wrapper'
 import { Header } from '@/shared/components/Header'
 import { Page } from '@/shared/components/Page'
 import { Main } from '@/shared/components/Main'
+import { defaultTransactionFormData, TransactionForm } from '@/features/transaction-form'
 
 export function HomePage() {
   return (
@@ -19,6 +20,10 @@ export function HomePage() {
         <Main>
           <Container>
             Home page
+
+            <TransactionForm 
+              initialTransactionData={defaultTransactionFormData}
+            />
           </Container>
         </Main>
       </Wrapper>
