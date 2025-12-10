@@ -19,13 +19,13 @@ export interface TransactionFormStore extends TransactionFormState, TransactionF
 export const useTransactionFormStore = create<TransactionFormStore>(set => ({
   ...defaultTransactionFormData,
 
-  updateTransactionType: (transactionType) => set(state => ({ ...state, transactionType })),
-  updateTransactionDescription: (transactionDescription) => set(state => ({ ...state, transactionDescription })),
+  updateTransactionType: (transactionType) => set(state => ({ ...state, type: transactionType })),
+  updateTransactionDescription: (transactionDescription) => set(state => ({ ...state, description: transactionDescription })),
 
-  updateTransactionReceived: (transactionReceived) => set(state => ({ ...state, transactionReceived })),
-  updateTransactionLost: (transactionReceived) => set(state => ({ ...state, transactionReceived })),
+  updateTransactionReceived: (transactionReceived) => set(state => ({ ...state, received: transactionReceived })),
+  updateTransactionLost: (transactionLost) => set(state => ({ ...state, lost: transactionLost })),
 
-  updateTransactionDate: (transactionDate) => set(state => ({ ...state, transactionDate })),
+  updateTransactionDate: (transactionDate) => set(state => ({ ...state, date: transactionDate })),
 }))
 
 export const transactionTypeSelector = (store: TransactionFormStore) => store.type
