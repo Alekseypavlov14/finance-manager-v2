@@ -3,12 +3,13 @@ import { losingTransactionTypes, receivingTransactionTypes, transactionTypes, ty
 import { currenciesSelector, useCurrenciesStore } from '@/entities/currency'
 import { convertDayjsToMilliseconds } from '@/shared/utils/datetime'
 import { DatePicker, Input, Select } from 'antd'
-import type { Option } from '@/shared/types/option'
-import type { Id } from '@/shared/types/entity'
+import { useLoadInitialData } from '../../hooks/use-load-initial-data'
 import { FieldColumn } from '@/shared/components/FieldColumn'
 import { FieldLabel } from '@/shared/components/FieldLabel'
 import { Field } from '@/shared/components/Field'
 import { Form } from '@/shared/components/Form'
+import type { Option } from '@/shared/types/option'
+import type { Id } from '@/shared/types/entity'
 import dayjs from 'dayjs'
 import styles from './TransactionForm.module.css'
 
@@ -19,6 +20,8 @@ interface TransactionFormProps {
 export function TransactionForm({
   initialTransactionData,
 }: TransactionFormProps) {
+  useLoadInitialData(initialTransactionData)
+
   const transactionType = useTransactionFormStore(transactionTypeSelector)
   const transactionDescription = useTransactionFormStore(transactionDescriptionSelector)
   const transactionReceived = useTransactionFormStore(transactionReceivedSelector)
@@ -42,7 +45,6 @@ export function TransactionForm({
   function updateTransactionReceivedCurrencyId(currencyId: Id) {
     updateTransactionReceived({ ...transactionReceived, currencyId })
   }
-
   function updateTransactionLostAmount(amount: number) {
     updateTransactionLost({ ...transactionReceived, amount })
   }
