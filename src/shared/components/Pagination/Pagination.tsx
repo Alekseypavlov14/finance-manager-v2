@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 import { Palette } from '../Palette'
-import { clamp } from '../../utils/clamp'
+import { clamp } from '@/shared/utils/clamp'
 import chevronIcon from './chevron-right.svg'
 import styles from './Pagination.module.css'
 import clsx from 'clsx'
@@ -8,6 +8,7 @@ import clsx from 'clsx'
 interface PaginationProps extends Omit<ComponentProps<'div'>, 'children'> {
   totalPagesAmount: number
   currentPage: number
+
   onCurrentPageChange?: (currentPage: number) => void
   hideForSinglePage?: boolean
 }
@@ -15,6 +16,7 @@ interface PaginationProps extends Omit<ComponentProps<'div'>, 'children'> {
 export function Pagination({
   totalPagesAmount,
   currentPage,
+
   onCurrentPageChange = () => {},
   hideForSinglePage,
 
