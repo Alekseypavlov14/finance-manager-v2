@@ -3,7 +3,7 @@ import { HomePage } from '@/pages/HomePage'
 
 export const routing = createBrowserRouter([
   {
-    path: '',
+    path: '/',
     element: <HomePage />
   }
 ])
