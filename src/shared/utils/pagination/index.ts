@@ -28,5 +28,5 @@ export function createPaginationStore(initial: Partial<PaginationState> = {}) {
 export const currentPageSelector = (store: PaginationStore) => store.currentPage
 export const totalPagesSelector = (store: PaginationStore) => store.totalPages
 
-export const updateCurrentPage = (store: PaginationStore) => store.updateCurrentPage
-export const updateTotalPages = (store: PaginationStore) => store.updateTotalPages
+export const updateCurrentPageSelector = (store: PaginationStore) => store.updateCurrentPage
+export const updateTotalPagesSelector = (store: PaginationStore) => store.updateTotalPages
