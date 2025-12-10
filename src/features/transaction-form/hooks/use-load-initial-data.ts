@@ -17,5 +17,5 @@ export function useLoadInitialData(initialData: TransactionData) {
     updateTransactionLost(initialData.lost)
 
     updateTransactionDate(initialData.date)
-  }, [initialData])
+  }, [])
 }

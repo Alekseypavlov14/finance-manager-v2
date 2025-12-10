@@ -1,4 +1,4 @@
-import { defaultTransactionFormData, TransactionForm } from '@/features/transaction-form'
+import { CreateTransactionForm } from '@/features/modify-transaction'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
 import { AppSidebar } from '@/widgets/AppSidebar'
 import { Container } from '@/shared/components/Container'
@@ -23,9 +23,7 @@ export function HomePage() {
             Home page
 
             <Palette block round>
-              <TransactionForm 
-                initialTransactionData={defaultTransactionFormData}
-              />
+              <CreateTransactionForm />
             </Palette>
           </Container>
         </Main>
