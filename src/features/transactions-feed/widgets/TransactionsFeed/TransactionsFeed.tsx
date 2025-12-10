@@ -1,4 +1,4 @@
-import { Transaction, TransactionAmount, TransactionComment, TransactionDate, TransactionRow } from '@/features/display-transaction'
+import { formatTransactionAmount, formatTransactionDate, Transaction, TransactionAmount, TransactionComment, TransactionDate, TransactionRow } from '@/features/display-transaction'
 import { currentPageSelector, totalPagesSelector, updateCurrentPageSelector } from '@/shared/utils/pagination'
 import { useTransactionsFeedPaginationStore } from '../../transactions-feed-pagination.store'
 import { TransactionsGroupLabel } from '../../components/TransactionsGroupLabel'
@@ -28,9 +28,13 @@ export function TransactionsFeed() {
               {group.transactions.map(transaction => (
                 <Transaction key={transaction.id}>
                   <TransactionRow>
-                    <TransactionAmount></TransactionAmount>
+                    <TransactionAmount>
+                      {formatTransactionAmount(transaction.received.amount)}
+                    </TransactionAmount>
 
-                    <TransactionDate></TransactionDate>
+                    <TransactionDate>
+                      {formatTransactionDate(transaction.date)}
+                    </TransactionDate>
                   </TransactionRow>
 
                   <TransactionRow>
