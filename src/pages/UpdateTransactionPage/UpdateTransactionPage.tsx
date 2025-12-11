@@ -26,6 +26,7 @@ export function UpdateTransactionPage() {
                 <UpdateTransactionForm 
                   transaction={currentTransaction} 
                   onSave={navigateTransactionsFeedPage}
+                  onDelete={navigateTransactionsFeedPage}
                 />
               ) : null}
             </Palette>

@@ -7,11 +7,13 @@ import styles from './UpdateTransactionForm.module.css'
 interface UpdateTransactionFormProps {
   transaction: TransactionEntity
   onSave?: () => void 
+  onDelete?: () => void
 }
 
 export function UpdateTransactionForm({ 
   transaction,
-  onSave = () => {} 
+  onSave = () => {}, 
+  onDelete = () => {},
 }: UpdateTransactionFormProps) {
   const { updateTransaction, deleteTransaction } = useTransactionsActions()
   const transactionFormData = useTransactionFormData()
@@ -32,7 +34,10 @@ export function UpdateTransactionForm({
         </Button>
 
         <Button 
-          onClick={() => deleteTransaction(transaction.id)}
+          onClick={() => {
+            deleteTransaction(transaction.id)
+            onDelete()
+          }}
           danger
         >
           Delete transaction
