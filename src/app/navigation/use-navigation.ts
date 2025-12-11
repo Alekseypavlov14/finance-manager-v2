@@ -6,7 +6,9 @@ export function useNavigation() {
 
   return ({
     navigateHomePage: () => navigate('/'),
+    navigateTransactionsFeedPage: () => navigate('/transactions/feed'),
     navigateCreateTransactionPage: () => navigate('/transactions/create'),
     navigateUpdateTransactionPage: (id: Id) => navigate(`/transactions/${id}/update`),
+    navigateSettingsPage: () => navigate('/settings')
   })
 }

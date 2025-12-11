@@ -1,7 +1,7 @@
 import { formatTransactionDate, Transaction, TransactionAmount, TransactionComment, TransactionDate, TransactionRow, useDisplayTransactions } from '@/features/display-transaction'
+import { losingTransactionTypes, receivingTransactionTypes, transactionTypeDeposit, transactionTypeWithdraw } from '@/entities/transactions'
 import { currentPageSelector, totalPagesSelector, updateCurrentPageSelector } from '@/shared/utils/pagination'
 import { displayTransactionsCommentsSelector, useSettingsStore } from '@/features/settings'
-import { losingTransactionTypes, receivingTransactionTypes } from '@/entities/transactions'
 import { groupingModeSelector, useTransactionsFeedStore } from '../../transactions-feed.store'
 import { mapTransactionGroupingModeToLabelStrategy } from '../../constants'
 import { useTransactionsFeedPaginationStore } from '../../transactions-feed-pagination.store'
@@ -40,14 +40,18 @@ export function TransactionsFeed() {
 
             <TransactionsGroupList>
               {group.transactions.map(transaction => (
-                <Transaction key={transaction.id}>
+                <Transaction 
+                  positive={transaction.type === transactionTypeDeposit}
+                  negative={transaction.type === transactionTypeWithdraw}
+                  key={transaction.id}
+                >
                   <TransactionRow>
                     <TransactionAmount>
                       {receivingTransactionTypes.includes(transaction.type) ? (
                         <span className={styles.Receiving}>{formatAmountWithCurrency(transaction.received.amount, transaction.received.currencyId)}</span>
                       ) : null}
                       {losingTransactionTypes.includes(transaction.type) ? (
-                        <span className={styles.Losing}>{formatAmountWithCurrency(transaction.lost.amount, transaction.lost.currencyId)}</span>
+                        <span className={styles.Losing}>{formatAmountWithCurrency(-transaction.lost.amount, transaction.lost.currencyId)}</span>
                       ) : null}
                     </TransactionAmount>
 

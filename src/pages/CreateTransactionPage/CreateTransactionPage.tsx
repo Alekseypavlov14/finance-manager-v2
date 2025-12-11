@@ -1,5 +1,6 @@
 import { CreateTransactionForm } from '@/features/modify-transaction'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
+import { useNavigation } from '@/app/navigation'
 import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { AppSidebar } from '@/widgets/AppSidebar'
 import { Container } from '@/shared/components/Container'
@@ -10,6 +11,8 @@ import { Page } from '@/shared/components/Page'
 import { Main } from '@/shared/components/Main'
 
 export function CreateTransactionPage() {
+  const { navigateTransactionsFeedPage } = useNavigation()
+
   return (
     <Page>
       <Wrapper>
@@ -24,7 +27,7 @@ export function CreateTransactionPage() {
         <Main>
           <Container>
             <Palette round block>
-              <CreateTransactionForm />
+              <CreateTransactionForm onSave={navigateTransactionsFeedPage} />
             </Palette>
           </Container>
         </Main>

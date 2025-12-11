@@ -1,4 +1,11 @@
 .Transaction {
-  padding: 10px;
   border-radius: 10px;
+  padding: 10px;
+}
+
+.Positive {
+  border-left: 5px solid var(--green);
+}
+.Negative {
+  border-left: 5px solid var(--grey-400);
 }

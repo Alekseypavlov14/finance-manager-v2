@@ -5,7 +5,11 @@ import { FormActions } from '@/shared/components/FormActions'
 import { Button } from 'antd'
 import styles from './CreateTransactionForm.module.css'
 
-export function CreateTransactionForm() {
+export interface CreateTransactionFormProps {
+  onSave?: () => void
+}
+
+export function CreateTransactionForm({ onSave = () => {} }: CreateTransactionFormProps) {
   const transactionFormData = useTransactionFormData()
   const { createTransaction } = useTransactionsActions()
 
@@ -17,7 +21,10 @@ export function CreateTransactionForm() {
 
       <FormActions>
         <Button 
-          onClick={() => createTransaction(transactionFormData)}
+          onClick={() => {
+            createTransaction(transactionFormData)
+            onSave()
+          }}
           type='primary'
         >
           Create transaction

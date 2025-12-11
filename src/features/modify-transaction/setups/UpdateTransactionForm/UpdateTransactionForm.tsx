@@ -6,9 +6,13 @@ import styles from './UpdateTransactionForm.module.css'
 
 interface UpdateTransactionFormProps {
   transaction: TransactionEntity
+  onSave?: () => void 
 }
 
-export function UpdateTransactionForm({ transaction }: UpdateTransactionFormProps) {
+export function UpdateTransactionForm({ 
+  transaction,
+  onSave = () => {} 
+}: UpdateTransactionFormProps) {
   const { updateTransaction, deleteTransaction } = useTransactionsActions()
   const transactionFormData = useTransactionFormData()
 
@@ -18,7 +22,10 @@ export function UpdateTransactionForm({ transaction }: UpdateTransactionFormProp
 
       <FormActions>
         <Button 
-          onClick={() => updateTransaction(transaction.id, transactionFormData)}
+          onClick={() => {
+            updateTransaction(transaction.id, transactionFormData)
+            onSave()
+          }}
           type='primary'
         >
           Update transaction

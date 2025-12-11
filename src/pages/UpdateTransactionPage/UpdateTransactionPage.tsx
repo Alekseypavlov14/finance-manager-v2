@@ -1,4 +1,5 @@
 import { UpdateTransactionForm, useCurrentTransaction } from '@/features/modify-transaction'
+import { useNavigation } from '@/app/navigation'
 import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { Container } from '@/shared/components/Container'
 import { Wrapper } from '@/shared/components/Wrapper'
@@ -9,6 +10,8 @@ import { Page } from '@/shared/components/Page'
 
 export function UpdateTransactionPage() {
   const currentTransaction = useCurrentTransaction()
+  const { navigateTransactionsFeedPage } = useNavigation()
+
   return (
     <Page>
       <Wrapper>
@@ -20,7 +23,10 @@ export function UpdateTransactionPage() {
           <Container>
             <Palette round block>
               {currentTransaction ? (
-                <UpdateTransactionForm transaction={currentTransaction} />
+                <UpdateTransactionForm 
+                  transaction={currentTransaction} 
+                  onSave={navigateTransactionsFeedPage}
+                />
               ) : null}
             </Palette>
           </Container>
