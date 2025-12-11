@@ -22,7 +22,7 @@ export function TransactionsFeed() {
       <TransactionsGroups>
         {transactionGroups.map((group, index) => (
           <TransactionsGroup key={index}>
-            <TransactionsGroupLabel>{group.label}</TransactionsGroupLabel>
+            <TransactionsGroupLabel>{group.groupingMoment}</TransactionsGroupLabel>
 
             <TransactionsGroupList>
               {group.transactions.map(transaction => (

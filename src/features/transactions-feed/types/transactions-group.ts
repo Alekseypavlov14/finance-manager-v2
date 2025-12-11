@@ -1,6 +1,6 @@
 import type { TransactionEntity } from '@/entities/transactions'
 
 export interface TransactionsGroup {
-  label: string
+  groupingMoment: number
   transactions: TransactionEntity[]
 }
