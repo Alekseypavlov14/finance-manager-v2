@@ -1,5 +1,7 @@
 import { CreateTransactionForm } from '@/features/modify-transaction'
+import { AppBurgerButton } from '@/widgets/AppBurgerButton'
 import { HeaderLogo } from '@/widgets/HeaderLogo'
+import { AppSidebar } from '@/widgets/AppSidebar'
 import { Container } from '@/shared/components/Container'
 import { Wrapper } from '@/shared/components/Wrapper'
 import { Palette } from '@/shared/components/Palette'
@@ -13,7 +15,11 @@ export function CreateTransactionPage() {
       <Wrapper>
         <Header>
           <HeaderLogo />
+
+          <AppBurgerButton />
         </Header>
+
+        <AppSidebar />
 
         <Main>
           <Container>

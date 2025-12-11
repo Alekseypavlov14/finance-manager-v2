@@ -15,5 +15,9 @@ export const routing = createBrowserRouter([
   {
     path: '/transactions/:id/update',
     element: <UpdateTransactionPage />
+  },
+  {
+    path: '*',
+    element: <></>
   }
 ])

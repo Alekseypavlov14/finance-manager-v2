@@ -1,0 +1,19 @@
+.AppNavigation {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+}
+
+.Link {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--black);
+
+  transition: 0.3s;
+  padding: 5px 10px;
+}
+
+.Link:hover {
+  color: var(--primary);
+  background-color: var(--grey-900);
+}
