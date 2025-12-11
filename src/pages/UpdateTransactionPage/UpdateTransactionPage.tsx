@@ -1,4 +1,5 @@
 import { UpdateTransactionForm, useCurrentTransaction } from '@/features/modify-transaction'
+import { Container } from '@/shared/components/Container'
 import { Wrapper } from '@/shared/components/Wrapper'
 import { Palette } from '@/shared/components/Palette'
 import { Header } from '@/shared/components/Header'
@@ -15,11 +16,13 @@ export function UpdateTransactionPage() {
         </Header>
 
         <Main>
-          <Palette>
-            {currentTransaction ? (
-              <UpdateTransactionForm transaction={currentTransaction} />
-            ) : null}
-          </Palette>
+          <Container>
+            <Palette round block>
+              {currentTransaction ? (
+                <UpdateTransactionForm transaction={currentTransaction} />
+              ) : null}
+            </Palette>
+          </Container>
         </Main>
       </Wrapper>
     </Page>

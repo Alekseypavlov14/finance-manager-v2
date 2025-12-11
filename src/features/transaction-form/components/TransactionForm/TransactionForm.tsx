@@ -71,7 +71,7 @@ export function TransactionForm({
           <FieldColumn>
             <Input 
               value={transactionReceived.amount}
-              onChange={(e) => updateTransactionReceivedAmount(parseFloat(e.target.value))}
+              onChange={(e) => updateTransactionReceivedAmount(parseFloat(e.target.value) || 0)}
             />
 
             <Select 
@@ -91,7 +91,7 @@ export function TransactionForm({
           <FieldColumn>
             <Input 
               value={transactionLost.amount}
-              onChange={(e) => updateTransactionLostAmount(parseFloat(e.target.value))}
+              onChange={(e) => updateTransactionLostAmount(parseFloat(e.target.value) || 0)}
             />
 
             <Select 

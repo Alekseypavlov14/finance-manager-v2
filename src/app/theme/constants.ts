@@ -20,8 +20,9 @@ export const themeConfig: ThemeConfig = {
   },
   components: {
     Select: {
-      optionActiveBg: '#7F78FF',
+      optionActiveBg: '#7F78FF4D',
       optionSelectedBg: '#7F78FF',
+      optionSelectedColor: '#FFFFFF'
     }
   }
 }
