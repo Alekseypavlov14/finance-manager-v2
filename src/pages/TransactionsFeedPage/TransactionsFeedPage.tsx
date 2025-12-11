@@ -1,5 +1,7 @@
+import { CreateTransactionButton } from '@/features/modify-transaction'
 import { TransactionsFeed } from '@/features/transactions-feed'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
+import { FloatingArea } from '@/shared/components/FloatingArea'
 import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { AppSidebar } from '@/widgets/AppSidebar'
 import { Container } from '@/shared/components/Container'
@@ -25,6 +27,10 @@ export function TransactionsFeedPage() {
             <TransactionsFeed />
           </Container>
         </Main>
+
+        <FloatingArea>
+          <CreateTransactionButton />
+        </FloatingArea>
       </Wrapper>
     </Page>
   )

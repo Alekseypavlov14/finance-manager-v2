@@ -4,13 +4,19 @@
   flex: 0 0 var(--size);
   width: var(--size);
   height: var(--size);
+  border-radius: var(--size);
 
   box-shadow: var(--shadow-base);
 
   background-color: var(--white);
   color: var(--black);
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   outline: none;
+  border: none;
 }
 
 .Filled {
