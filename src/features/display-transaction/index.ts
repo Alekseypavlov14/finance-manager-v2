@@ -7,5 +7,7 @@ export * from './components/TransactionRow'
 export * from './components/TransactionComment'
 export * from './components/TransactionDate'
 
+export * from './hooks/use-display-transactions'
+
 export * from './utils/format-transaction-amount'
 export * from './utils/format-transaction-date'

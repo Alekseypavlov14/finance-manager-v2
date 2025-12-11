@@ -1,5 +1,6 @@
-import { formatTransactionAmount, formatTransactionDate, Transaction, TransactionAmount, TransactionComment, TransactionDate, TransactionRow } from '@/features/display-transaction'
+import { formatTransactionDate, Transaction, TransactionAmount, TransactionComment, TransactionDate, TransactionRow, useDisplayTransactions } from '@/features/display-transaction'
 import { currentPageSelector, totalPagesSelector, updateCurrentPageSelector } from '@/shared/utils/pagination'
+import { losingTransactionTypes, receivingTransactionTypes } from '@/entities/transactions'
 import { groupingModeSelector, useTransactionsFeedStore } from '../../transactions-feed.store'
 import { mapTransactionGroupingModeToLabelStrategy } from '../../constants'
 import { useTransactionsFeedPaginationStore } from '../../transactions-feed-pagination.store'
@@ -13,6 +14,7 @@ import styles from './TransactionsFeed.module.css'
 
 export function TransactionsFeed() {
   const transactionGroups = useTransactionsGroups()
+  const { formatAmountWithCurrency } = useDisplayTransactions()
 
   const currentPage = useTransactionsFeedPaginationStore(currentPageSelector)
   const totalPages = useTransactionsFeedPaginationStore(totalPagesSelector)
@@ -34,7 +36,12 @@ export function TransactionsFeed() {
                 <Transaction key={transaction.id}>
                   <TransactionRow>
                     <TransactionAmount>
-                      {formatTransactionAmount(transaction.received.amount)}
+                      {receivingTransactionTypes.includes(transaction.type) ? (
+                        <span className={styles.Receiving}>{formatAmountWithCurrency(transaction.received.amount, transaction.received.currencyId)}</span>
+                      ) : null}
+                      {losingTransactionTypes.includes(transaction.type) ? (
+                        <span className={styles.Losing}>{formatAmountWithCurrency(transaction.lost.amount, transaction.lost.currencyId)}</span>
+                      ) : null}
                     </TransactionAmount>
 
                     <TransactionDate>
