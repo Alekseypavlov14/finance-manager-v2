@@ -11,6 +11,7 @@ import { TransactionsGroups } from '../../components/TransactionsGroups'
 import { TransactionsGroup } from '../../components/TransactionsGroup'
 import { Pagination } from 'antd'
 import styles from './TransactionsFeed.module.css'
+import { Placeholder } from '@/shared/components/Placeholder'
 
 export function TransactionsFeed() {
   const transactionGroups = useTransactionsGroups()
@@ -59,6 +60,10 @@ export function TransactionsFeed() {
             </TransactionsGroupList>
           </TransactionsGroup>
         ))}
+
+        {!transactionGroups.length ? (
+          <Placeholder>No transactions created</Placeholder>
+        ) : null}
       </TransactionsGroups>
 
       <Pagination 
