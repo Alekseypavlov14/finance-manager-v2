@@ -25,14 +25,17 @@ export function getTransactionsGroups({
     groupsMap[groupingMoment].transactions.push(transaction)
   })
 
-  const groups = Object.values(groupsMap).map(group => ({
-    ...group,
-    transactions: sortTransactionsAscendingByDate(group.transactions)
-  }))
+  const groups = new Collection(Object.values(groupsMap))
+    .sortDescendingBy(group => group.groupingMoment)
+    .getItems()
+    .map(group => ({
+      ...group,
+      transactions: sortTransactionsAscendingByDate(group.transactions)
+    }))
   
   return groups
 }
 
 function sortTransactionsAscendingByDate(transactions: TransactionEntity[]) {
-  return new Collection(transactions).sortAscendingBy(transaction => transaction.date).getItems()
+  return new Collection(transactions).sortDescendingBy(transaction => transaction.date).getItems()
 }

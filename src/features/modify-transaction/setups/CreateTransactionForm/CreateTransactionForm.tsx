@@ -17,7 +17,7 @@ export function CreateTransactionForm() {
 
       <FormActions>
         <Button 
-          onChange={() => createTransaction(transactionFormData)}
+          onClick={() => createTransaction(transactionFormData)}
           type='primary'
         >
           Create transaction

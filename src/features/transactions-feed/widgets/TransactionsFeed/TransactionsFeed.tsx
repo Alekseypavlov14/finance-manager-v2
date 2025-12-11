@@ -1,19 +1,23 @@
 import { formatTransactionDate, Transaction, TransactionAmount, TransactionComment, TransactionDate, TransactionRow, useDisplayTransactions } from '@/features/display-transaction'
 import { currentPageSelector, totalPagesSelector, updateCurrentPageSelector } from '@/shared/utils/pagination'
+import { displayTransactionsCommentsSelector, useSettingsStore } from '@/features/settings'
 import { losingTransactionTypes, receivingTransactionTypes } from '@/entities/transactions'
 import { groupingModeSelector, useTransactionsFeedStore } from '../../transactions-feed.store'
 import { mapTransactionGroupingModeToLabelStrategy } from '../../constants'
 import { useTransactionsFeedPaginationStore } from '../../transactions-feed-pagination.store'
+import { useSubscribeOnTransactions } from '../../hooks/use-subscribe-on-transactions'
 import { TransactionsGroupLabel } from '../../components/TransactionsGroupLabel'
 import { TransactionsGroupList } from '../../components/TransactionsGroupList'
 import { useTransactionsGroups } from '../../hooks/use-transactions-groups'
 import { TransactionsGroups } from '../../components/TransactionsGroups'
 import { TransactionsGroup } from '../../components/TransactionsGroup'
+import { Placeholder } from '@/shared/components/Placeholder'
 import { Pagination } from 'antd'
 import styles from './TransactionsFeed.module.css'
-import { Placeholder } from '@/shared/components/Placeholder'
 
 export function TransactionsFeed() {
+  useSubscribeOnTransactions()
+
   const transactionGroups = useTransactionsGroups()
   const { formatAmountWithCurrency } = useDisplayTransactions()
 
@@ -24,6 +28,8 @@ export function TransactionsFeed() {
 
   const transactionsGroupingMode = useTransactionsFeedStore(groupingModeSelector)
   const labelFormatter = mapTransactionGroupingModeToLabelStrategy[transactionsGroupingMode]
+
+  const displayTransactionsComments = useSettingsStore(displayTransactionsCommentsSelector)
 
   return (
     <div className={styles.TransactionsFeed}>
@@ -50,11 +56,13 @@ export function TransactionsFeed() {
                     </TransactionDate>
                   </TransactionRow>
 
-                  <TransactionRow>
-                    <TransactionComment>
-                      
-                    </TransactionComment>  
-                  </TransactionRow>
+                  {displayTransactionsComments ? (
+                    <TransactionRow>
+                      <TransactionComment>
+                        {transaction.description}
+                      </TransactionComment>  
+                    </TransactionRow>
+                  ) : null}
                 </Transaction>
               ))}
             </TransactionsGroupList>

@@ -9,7 +9,7 @@ export function useDisplayTransactions() {
     const currency = getCurrencyById(currencyId)
     if (!currency) return ''
 
-    return `${formatTransactionAmount(amount)} ${currency}`
+    return `${formatTransactionAmount(amount)} ${currency.label}`
   }
 
   return ({
