@@ -1,10 +1,14 @@
-import { transactionsSelector, updateTransactionsSelector, useTransactionsStore, type TransactionData, type TransactionEntity } from '@/entities/transactions'
+import { transactionsLocalStorage, transactionsSelector, updateTransactionsSelector, useTransactionsStore, type TransactionData, type TransactionEntity } from '@/entities/transactions'
 import { generateId } from '@/shared/utils/id'
 import type { Id } from '@/shared/types/entity'
+import { useEffect } from 'react'
 
 export function useTransactionsActions() {
   const transactions = useTransactionsStore(transactionsSelector)
   const updateTransactions = useTransactionsStore(updateTransactionsSelector)
+
+  // operations are persistent
+  useEffect(() => transactionsLocalStorage.setValue(transactions), [transactions])
 
   function createTransaction(data: TransactionData) {
     const newTransaction: TransactionEntity = {
