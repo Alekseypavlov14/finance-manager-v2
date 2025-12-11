@@ -1,6 +1,5 @@
+import { useTransactionsActions, type TransactionEntity } from '@/entities/transactions'
 import { TransactionForm, useTransactionFormData } from '@/features/transaction-form'
-import type { TransactionEntity } from '@/entities/transactions'
-import { useTransactionActions } from '../../hooks/use-transaction-actions'
 import { FormActions } from '@/shared/components/FormActions'
 import { Button } from 'antd'
 import styles from './UpdateTransactionForm.module.css'
@@ -10,7 +9,7 @@ interface UpdateTransactionFormProps {
 }
 
 export function UpdateTransactionForm({ transaction }: UpdateTransactionFormProps) {
-  const { updateTransaction, deleteTransaction } = useTransactionActions()
+  const { updateTransaction, deleteTransaction } = useTransactionsActions()
   const transactionFormData = useTransactionFormData()
 
   return (

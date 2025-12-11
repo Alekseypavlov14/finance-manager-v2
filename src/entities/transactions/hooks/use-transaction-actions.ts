@@ -2,7 +2,7 @@ import { transactionsSelector, updateTransactionsSelector, useTransactionsStore,
 import { generateId } from '@/shared/utils/id'
 import type { Id } from '@/shared/types/entity'
 
-export function useTransactionActions() {
+export function useTransactionsActions() {
   const transactions = useTransactionsStore(transactionsSelector)
   const updateTransactions = useTransactionsStore(updateTransactionsSelector)
 
