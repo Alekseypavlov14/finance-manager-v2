@@ -1,5 +1,7 @@
 import { formatTransactionAmount, formatTransactionDate, Transaction, TransactionAmount, TransactionComment, TransactionDate, TransactionRow } from '@/features/display-transaction'
 import { currentPageSelector, totalPagesSelector, updateCurrentPageSelector } from '@/shared/utils/pagination'
+import { groupingModeSelector, useTransactionsFeedStore } from '../../transactions-feed.store'
+import { mapTransactionGroupingModeToLabelStrategy } from '../../constants'
 import { useTransactionsFeedPaginationStore } from '../../transactions-feed-pagination.store'
 import { TransactionsGroupLabel } from '../../components/TransactionsGroupLabel'
 import { TransactionsGroupList } from '../../components/TransactionsGroupList'
@@ -17,12 +19,15 @@ export function TransactionsFeed() {
 
   const updateCurrentPage = useTransactionsFeedPaginationStore(updateCurrentPageSelector)
 
+  const transactionsGroupingMode = useTransactionsFeedStore(groupingModeSelector)
+  const labelFormatter = mapTransactionGroupingModeToLabelStrategy[transactionsGroupingMode]
+
   return (
     <div className={styles.TransactionsFeed}>
       <TransactionsGroups>
         {transactionGroups.map((group, index) => (
           <TransactionsGroup key={index}>
-            <TransactionsGroupLabel>{group.groupingMoment}</TransactionsGroupLabel>
+            <TransactionsGroupLabel>{labelFormatter(group.groupingMoment)}</TransactionsGroupLabel>
 
             <TransactionsGroupList>
               {group.transactions.map(transaction => (

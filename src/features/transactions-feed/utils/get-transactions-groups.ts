@@ -1,11 +1,11 @@
-import type { TransactionGroupingStrategy } from '../types/transaction-grouping-strategy'
+import type { TransactionsGroupingStrategy } from '../types/transactions-grouping-strategy'
 import type { TransactionEntity } from '@/entities/transactions'
 import type { TransactionsGroup } from '../types/transactions-group'
 import { Collection } from '@oleksii-pavlov/collections'
 
 export interface GetTransactionsGroupsParams {
   transactions: TransactionEntity[]
-  groupingMomentSelector: TransactionGroupingStrategy
+  groupingMomentSelector: TransactionsGroupingStrategy
 }
 
 export function getTransactionsGroups({
