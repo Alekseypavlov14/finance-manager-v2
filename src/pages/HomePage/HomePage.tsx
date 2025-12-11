@@ -1,5 +1,6 @@
 import { TransactionsFeed } from '@/features/transactions-feed'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
+import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { AppSidebar } from '@/widgets/AppSidebar'
 import { Container } from '@/shared/components/Container'
 import { Wrapper } from '@/shared/components/Wrapper'
@@ -12,6 +13,8 @@ export function HomePage() {
     <Page>
       <Wrapper>
         <Header>
+          <HeaderLogo />
+
           <AppBurgerButton />
         </Header>
 

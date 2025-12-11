@@ -1,4 +1,5 @@
 import { CreateTransactionForm } from '@/features/modify-transaction'
+import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { Container } from '@/shared/components/Container'
 import { Wrapper } from '@/shared/components/Wrapper'
 import { Palette } from '@/shared/components/Palette'
@@ -11,7 +12,7 @@ export function CreateTransactionPage() {
     <Page>
       <Wrapper>
         <Header>
-
+          <HeaderLogo />
         </Header>
 
         <Main>
