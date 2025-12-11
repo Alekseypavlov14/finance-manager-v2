@@ -1,0 +1,19 @@
+.FloatingAreaButton {
+  --size: 50px;
+
+  flex: 0 0 var(--size);
+  width: var(--size);
+  height: var(--size);
+
+  box-shadow: var(--shadow-base);
+
+  background-color: var(--white);
+  color: var(--black);
+
+  outline: none;
+}
+
+.Filled {
+  background-color: var(--primary);
+  color: var(--white);
+}

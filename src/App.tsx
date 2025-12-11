@@ -1,8 +1,11 @@
 import { RouterProvider } from 'react-router-dom'
+import { AntLayout } from '@/layouts/AntLayout'
 import { routing } from '@/app/routing'
 
 export function App() {
   return (
-    <RouterProvider router={routing} />
+    <AntLayout>
+      <RouterProvider router={routing} />
+    </AntLayout>
   )
 }

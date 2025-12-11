@@ -10,6 +10,7 @@
   --grey-600: #BBBBBB;
   --grey-500: #999999;
   --grey-400: #777777;
+  --grey-300: #444444;
   --grey-200: #222222;
 
   --primary: #7F78FF;
@@ -44,6 +45,6 @@ body {
 
 #root {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   background-color: var(--grey-900);
 }
