@@ -37,7 +37,7 @@ export function TransactionForm({
   const transactionTypeOptions = transactionTypes.map<Option<string>>(transactionType => ({ label: transactionType, value: transactionType }))
 
   const currencies = useCurrenciesStore(currenciesSelector)
-  const currencyOptions = currencies.map<Option<Id>>(currency => ({ label: currency.label, value: currency.id }))
+  const currencyOptions = currencies.map<Option<Id>>(currency => ({ label: currency.code, value: currency.id }))
 
   function updateTransactionReceivedAmount(amount: number) {
     updateTransactionReceived({ ...transactionReceived, amount })

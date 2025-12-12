@@ -3,11 +3,11 @@ import type { CurrencyEntity } from './currency.entity'
 // most used currencies
 export const USD_CURRENCY: CurrencyEntity = {
   id: 1,
-  label: 'USD'
+  code: 'USD'
 }
 export const EUR_CURRENCY: CurrencyEntity = {
   id: 2,
-  label: 'EUR'
+  code: 'EUR'
 }
 
 export const defaultReferenceCurrency = USD_CURRENCY
