@@ -1,5 +1,9 @@
 import type { ThemeConfig } from 'antd'
 
+export const primaryColor = 'var(--primary)'
+export const greenColor = 'var(--green)'
+export const redColor = 'var(--red)'
+
 export const themeConfig: ThemeConfig = {
   token: {
     colorPrimary: '#7F78FF',

@@ -14,8 +14,13 @@ export function useCurrencyRates() {
 
     return currencyToRate / currencyFromRate    
   }
+
+  function getCurrencyRate(currencyCode: CurrencyCode) {
+    return rates[currencyCode]
+  }
   
   return ({
-    getRateByCurrencyPair
+    getRateByCurrencyPair,
+    getCurrencyRate
   })
 }
