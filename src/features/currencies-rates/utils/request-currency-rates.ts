@@ -5,7 +5,11 @@ import type { RatesRecord } from '../types/rates-record'
 export async function requestCurrencyRates(rateCodes: CurrencyCode[]): Promise<RatesRecord> {
   const rates: RatesRecord = {}
 
-  await Promise.all(rateCodes.map<Promise<void>>(async (code) => {
+  await Promise.all(rateCodes.map<Promise<any>>(async (code) => {
+    if (code === USD_CURRENCY.code) {
+      return rates[code] = 1
+    }
+    
     const response = await RatesAPIRequestsHTTPClient.get<any>(`/${USD_CURRENCY.code}-${code}`).catch(() => {})
     if (!response) return
 

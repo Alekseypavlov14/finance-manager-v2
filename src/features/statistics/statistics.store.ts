@@ -1,3 +1,5 @@
+import { defaultStatisticsEndDate, defaultStatisticsIntervalStep, defaultStatisticsStartDate } from './constants'
+import { getIntervalEndByDate, getIntervalStartByDate } from './utils/get-frame-boundaries'
 import type { TransactionEntity } from '@/entities/transactions'
 import { create } from 'zustand'
 
@@ -22,9 +24,9 @@ export interface StatisticsStore extends StatisticsState, StatisticsActions {}
 
 export const useStatisticsStore = create<StatisticsStore>(set => ({
   transactions: [],
-  intervalStart: 0,
-  intervalEnd: 0,
-  intervalStep: 0,
+  intervalStart: getIntervalStartByDate(defaultStatisticsStartDate.getTimeInMilliseconds()),
+  intervalEnd: getIntervalEndByDate(defaultStatisticsEndDate.getTimeInMilliseconds()),
+  intervalStep: defaultStatisticsIntervalStep,
 
   updateTransactions: (transactions) => set(state => ({ ...state, transactions })),
   updateIntervalStart: (intervalStart) => set(state => ({ ...state, intervalStart })),

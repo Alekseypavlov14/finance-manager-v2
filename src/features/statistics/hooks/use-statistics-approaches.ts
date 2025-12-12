@@ -11,10 +11,10 @@ export function useStatisticApproaches() {
     const moneyAmountInUSD = transactionsMoney.map(money => {
       const currency = getCurrencyById(money.currencyId)
       if (!currency) return 0
-      
+
       const rate = getCurrencyRate(currency.code)
       if (!rate) return 0
-  
+      
       const amount = money.amount / rate
       return amount
     })
