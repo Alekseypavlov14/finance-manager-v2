@@ -12,6 +12,7 @@
   "dependencies": {
     "@oleksii-pavlov/collections": "^1.1.0",
     "@oleksii-pavlov/date-time": "^1.3.2",
+    "@oleksii-pavlov/ranges": "^1.1.0",
     "@oleksii-pavlov/storages": "^2.1.0",
     "antd": "^6.1.0",
     "clsx": "^2.1.1",
