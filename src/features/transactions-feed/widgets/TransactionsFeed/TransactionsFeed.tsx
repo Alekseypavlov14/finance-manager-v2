@@ -11,12 +11,15 @@ import { TransactionsGroupList } from '../../components/TransactionsGroupList'
 import { useTransactionsGroups } from '../../hooks/use-transactions-groups'
 import { TransactionsGroups } from '../../components/TransactionsGroups'
 import { TransactionsGroup } from '../../components/TransactionsGroup'
+import { useNavigation } from '@/app/navigation'
 import { Placeholder } from '@/shared/components/Placeholder'
 import { Pagination } from 'antd'
 import styles from './TransactionsFeed.module.css'
 
 export function TransactionsFeed() {
   useSubscribeOnTransactions()
+
+  const { navigateUpdateTransactionPage } = useNavigation()
 
   const transactionGroups = useTransactionsGroups()
   const { formatAmountWithCurrency } = useDisplayTransactions()
@@ -43,6 +46,7 @@ export function TransactionsFeed() {
                 <Transaction 
                   positive={transaction.type === transactionTypeDeposit}
                   negative={transaction.type === transactionTypeWithdraw}
+                  onClick={() => navigateUpdateTransactionPage(transaction.id)}
                   key={transaction.id}
                 >
                   <TransactionRow>
