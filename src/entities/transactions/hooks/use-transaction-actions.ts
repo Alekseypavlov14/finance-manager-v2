@@ -1,7 +1,8 @@
 import { transactionsLocalStorage, transactionsSelector, updateTransactionsSelector, useTransactionsStore, type TransactionData, type TransactionEntity } from '@/entities/transactions'
 import { generateId } from '@/shared/utils/id'
-import type { Id } from '@/shared/types/entity'
 import { useEffect } from 'react'
+import type { Nullable } from '@/shared/types/nullable'
+import type { Id } from '@/shared/types/entity'
 
 export function useTransactionsActions() {
   const transactions = useTransactionsStore(transactionsSelector)
@@ -9,6 +10,10 @@ export function useTransactionsActions() {
 
   // operations are persistent
   useEffect(() => transactionsLocalStorage.setValue(transactions), [transactions])
+
+  function getTransactionById(id: Id): Nullable<TransactionEntity> {
+    return transactions.find(transaction => transaction.id === id) ?? null
+  }
 
   function createTransaction(data: TransactionData) {
     const newTransaction: TransactionEntity = {
@@ -37,6 +42,7 @@ export function useTransactionsActions() {
   }
 
   return ({
+    getTransactionById,
     createTransaction,
     updateTransaction,
     deleteTransaction,
