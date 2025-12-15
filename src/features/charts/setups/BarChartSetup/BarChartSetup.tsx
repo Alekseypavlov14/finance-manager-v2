@@ -44,10 +44,13 @@ export function BarChartSetup({
       <YAxis 
         dataKey={'value'} 
         domain={dataDomain}
-        name={displayValueKey} 
       />
 
-      <Bar dataKey={'value'} fill={color} />
+      <Bar 
+        dataKey={'value'} 
+        fill={color} 
+        name={displayValueKey} 
+      />
 
       <Tooltip
         contentStyle={{ color: tooltipColor }}
@@ -58,7 +61,7 @@ export function BarChartSetup({
         itemStyle={{ color: tooltipColor }}
         formatter={valueFormatter}
       />
-      <CartesianGrid />
+      <CartesianGrid vertical={false} />
     </BarChart>
   )
 }

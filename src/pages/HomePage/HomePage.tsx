@@ -1,12 +1,12 @@
-import { useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
+import { useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
 import { CreateTransactionButton } from '@/features/modify-transaction'
+import { greenColor, redColor } from '@/app/theme'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
 import { formatAsMoney } from '@/shared/utils/formatters'
 import { BarChartSetup } from '@/features/charts'
 import { FloatingArea } from '@/shared/components/FloatingArea'
 import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { AppSidebar } from '@/widgets/AppSidebar'
-import { greenColor } from '@/app/theme'
 import { Container } from '@/shared/components/Container'
 import { Palette } from '@/shared/components/Palette'
 import { Wrapper } from '@/shared/components/Wrapper'
@@ -15,8 +15,10 @@ import { Page } from '@/shared/components/Page'
 import { Main } from '@/shared/components/Main'
 
 export function HomePage() {
-  const statisticsIncomesData = useStatisticsIncomesData()
   useSubscribeOnTransactions()
+
+  const statisticsIncomesData = useStatisticsIncomesData()
+  const statisticsExpensesData = useStatisticsExpensesData()
 
   return (
     <Page>
@@ -38,6 +40,14 @@ export function HomePage() {
                 displayValueKey='Amount in USD' 
                 valueFormatter={value => `${formatAsMoney(Number(value))} USD`}
                 color={greenColor} 
+              />
+
+              <BarChartSetup 
+                data={statisticsExpensesData} 
+                tooltipLabel='Expenses'
+                displayValueKey='Amount in USD' 
+                valueFormatter={value => `${formatAsMoney(Number(value))} USD`}
+                color={redColor} 
               />
             </Palette>
           </Container>
