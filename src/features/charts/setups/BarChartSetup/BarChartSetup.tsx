@@ -9,9 +9,13 @@ interface BarChartSetupProps {
   data: DataItem[]
   dataDomain?: DataDomain
 
-  tooltipLabel?: string
-  tooltipColor?: string
+  displayXAxis?: boolean
+  displayYAxis?: boolean
 
+  displayHorizontalLines?: boolean
+  displayVerticalLines?: boolean
+
+  tooltipColor?: string
   displayValueKey?: string
   valueFormatter?: (value: string) => string
 
@@ -23,9 +27,13 @@ export function BarChartSetup({
   data,
   dataDomain,
 
-  tooltipLabel = '',
-  tooltipColor = textColor,
+  displayXAxis = true,
+  displayYAxis = false,
 
+  displayHorizontalLines = true,
+  displayVerticalLines = false,
+
+  tooltipColor = textColor,
   displayValueKey,
   valueFormatter,
 
@@ -35,16 +43,22 @@ export function BarChartSetup({
   return (
     <BarChart 
       className={styles.BarChartSetup}
-      style={{ width: '100%' }}
-      height={height}
       data={data}
+      
+      margin={{ left: -15, top: 5 }}
+      height={height}
       responsive
     >
-      <XAxis dataKey={'label'} />
-      <YAxis 
-        dataKey={'value'} 
-        domain={dataDomain}
-      />
+      {displayXAxis ? (
+        <XAxis dataKey={'label'} />
+      ) : null}
+
+      {displayYAxis ? (
+        <YAxis 
+          dataKey={'value'} 
+          domain={dataDomain}
+        />
+      ) : null}
 
       <Bar 
         dataKey={'value'} 
@@ -53,15 +67,18 @@ export function BarChartSetup({
       />
 
       <Tooltip
-        contentStyle={{ color: tooltipColor }}
-        
+        contentStyle={{ color: tooltipColor }}  
         labelStyle={{ fontWeight: 500 }}
-        labelFormatter={() => tooltipLabel} 
+        cursor={{ opacity: 0.3 }}
 
         itemStyle={{ color: tooltipColor }}
         formatter={valueFormatter}
       />
-      <CartesianGrid vertical={false} />
+
+      <CartesianGrid
+        horizontal={displayHorizontalLines}
+        vertical={displayVerticalLines}
+      />
     </BarChart>
   )
 }

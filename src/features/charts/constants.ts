@@ -1,1 +1,1 @@
-export const DEFAULT_CHART_HEIGHT = 400
+export const DEFAULT_CHART_HEIGHT = 200

@@ -36,16 +36,14 @@ export function HomePage() {
             <Palette block round>
               <BarChartSetup 
                 data={statisticsIncomesData} 
-                tooltipLabel='Incomes'
-                displayValueKey='Amount in USD' 
+                displayValueKey='Incomes' 
                 valueFormatter={value => `${formatAsMoney(Number(value))} USD`}
                 color={greenColor} 
               />
 
               <BarChartSetup 
                 data={statisticsExpensesData} 
-                tooltipLabel='Expenses'
-                displayValueKey='Amount in USD' 
+                displayValueKey='Expenses' 
                 valueFormatter={value => `${formatAsMoney(Number(value))} USD`}
                 color={redColor} 
               />

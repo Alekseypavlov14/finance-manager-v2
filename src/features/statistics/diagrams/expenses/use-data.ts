@@ -13,7 +13,7 @@ export function useStatisticsExpensesData() {
     const amount = getTransactionsTotalAmount(money)
     
     return ({
-      label: formatDateShort(group.end),
+      label: `${formatDateShort(group.start)} - ${formatDateShort(group.end)}`,
       value: amount
     })
   })
