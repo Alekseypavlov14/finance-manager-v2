@@ -1,13 +1,15 @@
 import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts'
+import { getAdjustedTicks, getBalancedTicksIndexes } from '../../utils/get-adjusted-ticks'
 import { primaryColor, textColor } from '@/app/theme'
 import { DEFAULT_CHART_HEIGHT } from '../../constants'
-import type { DataItem } from '../../types/data-item'
 import type { DataDomain } from '../../types/data-domain'
+import type { DataItem } from '../../types/data-item'
 import styles from './BarChartSetup.module.css'
 
 interface BarChartSetupProps {
   data: DataItem[]
   dataDomain?: DataDomain
+  ticksIndexes?: number[]
 
   displayXAxis?: boolean
   displayYAxis?: boolean
@@ -26,6 +28,7 @@ interface BarChartSetupProps {
 export function BarChartSetup({
   data,
   dataDomain,
+  ticksIndexes = getBalancedTicksIndexes(data.length),
 
   displayXAxis = true,
   displayYAxis = false,
@@ -40,17 +43,22 @@ export function BarChartSetup({
   height = DEFAULT_CHART_HEIGHT,
   color = primaryColor,
 }: BarChartSetupProps) {
+  const ticks = getAdjustedTicks(data.map(data => data.label), ticksIndexes)
+
   return (
     <BarChart 
       className={styles.BarChartSetup}
       data={data}
       
-      margin={{ left: -15, top: 5 }}
+      margin={{ left: 5, top: 5 }}
       height={height}
       responsive
     >
       {displayXAxis ? (
-        <XAxis dataKey={'label'} />
+        <XAxis 
+          ticks={ticks}
+          dataKey={'label'} 
+        />
       ) : null}
 
       {displayYAxis ? (

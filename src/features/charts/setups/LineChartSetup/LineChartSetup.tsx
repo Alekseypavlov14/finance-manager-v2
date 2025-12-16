@@ -1,4 +1,5 @@
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { getAdjustedTicks, getBalancedTicksIndexes } from '../../utils/get-adjusted-ticks'
 import { primaryColor, textColor } from '@/app/theme'
 import { DEFAULT_CHART_HEIGHT } from '../../constants'
 import type { DataDomain } from '../../types/data-domain'
@@ -8,6 +9,7 @@ import styles from './LineChartSetup.module.css'
 interface LineChartSetupProps {
   data: DataItem[]
   dataDomain?: DataDomain
+  ticksIndexes?: number[]
 
   displayXAxis?: boolean
   displayYAxis?: boolean
@@ -26,6 +28,7 @@ interface LineChartSetupProps {
 export function LineChartSetup({
   data,
   dataDomain,
+  ticksIndexes = getBalancedTicksIndexes(data.length),
 
   displayXAxis = true,
   displayYAxis = false,
@@ -40,18 +43,23 @@ export function LineChartSetup({
   height = DEFAULT_CHART_HEIGHT,
   color = primaryColor,
 }: LineChartSetupProps) {
+  const ticks = getAdjustedTicks(data.map(data => data.label), ticksIndexes)
+
   return (
     <ResponsiveContainer height={height}>
       <LineChart 
         className={styles.LineChartSetup}
         data={data}
 
-        margin={{ left: -15, top: 5 }}
+        margin={{ left: 5, top: 5 }}
         height={height}
         responsive
       >
         {displayXAxis ? (
-          <XAxis dataKey={'label'} />
+          <XAxis
+            ticks={ticks}
+            dataKey={'label'} 
+          />
         ) : null}
 
         {displayYAxis ? (
