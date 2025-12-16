@@ -1,4 +1,4 @@
-import { transactionDateSelector, transactionDescriptionSelector, transactionLostSelector, transactionReceivedSelector, transactionTypeSelector, updateTransactionDateSelector, updateTransactionDescriptionSelector, updateTransactionLostSelector, updateTransactionReceivedSelector, updateTransactionTypeSelector, useTransactionFormStore } from '../../transaction-form.store'
+import { transactionDateSelector, transactionDescriptionSelector, transactionLostSelector, transactionReceivedSelector, transactionTypeSelector, updateTransactionDateSelector, updateTransactionDescriptionSelector, updateTransactionLostAmountSelector, updateTransactionLostCurrencyIdSelector, updateTransactionReceivedAmountSelector, updateTransactionReceivedCurrencyIdSelector, updateTransactionTypeSelector, useTransactionFormStore } from '../../transaction-form.store'
 import { losingTransactionTypes, receivingTransactionTypes, transactionTypes, type TransactionData } from '@/entities/transactions'
 import { currenciesSelector, useCurrenciesStore } from '@/entities/currency'
 import { convertDayjsToMilliseconds } from '@/shared/utils/datetime'
@@ -30,27 +30,16 @@ export function TransactionForm({
 
   const updateTransactionType = useTransactionFormStore(updateTransactionTypeSelector)
   const updateTransactionDescription = useTransactionFormStore(updateTransactionDescriptionSelector)
-  const updateTransactionReceived = useTransactionFormStore(updateTransactionReceivedSelector)
-  const updateTransactionLost = useTransactionFormStore(updateTransactionLostSelector)
+  const updateTransactionReceivedAmount = useTransactionFormStore(updateTransactionReceivedAmountSelector)
+  const updateTransactionReceivedCurrencyId = useTransactionFormStore(updateTransactionReceivedCurrencyIdSelector)
+  const updateTransactionLostAmount = useTransactionFormStore(updateTransactionLostAmountSelector)
+  const updateTransactionLostCurrencyId = useTransactionFormStore(updateTransactionLostCurrencyIdSelector)
   const updateTransactionDate = useTransactionFormStore(updateTransactionDateSelector)
 
   const transactionTypeOptions = transactionTypes.map<Option<string>>(transactionType => ({ label: transactionType, value: transactionType }))
 
   const currencies = useCurrenciesStore(currenciesSelector)
   const currencyOptions = currencies.map<Option<Id>>(currency => ({ label: currency.code, value: currency.id }))
-
-  function updateTransactionReceivedAmount(amount: number) {
-    updateTransactionReceived({ ...transactionReceived, amount })
-  }
-  function updateTransactionReceivedCurrencyId(currencyId: Id) {
-    updateTransactionReceived({ ...transactionReceived, currencyId })
-  }
-  function updateTransactionLostAmount(amount: number) {
-    updateTransactionLost({ ...transactionReceived, amount })
-  }
-  function updateTransactionLostCurrencyId(currencyId: Id) {
-    updateTransactionLost({ ...transactionReceived, currencyId })
-  }
 
   return (
     <Form>
