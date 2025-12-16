@@ -1,10 +1,6 @@
-import { StatisticsBlock, StatisticsBlockCaption, StatisticsBlockContent, StatisticsBlockLabel, StatisticsBlocks, useStatisticsBalanceData, useStatisticsCurrenciesData, useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
-import { BarChartSetup, getOptimalDataDomain, getPeaksFromSample, LineChartSetup } from '@/features/charts'
-import { greenColor, primaryColor, redColor } from '@/app/theme'
+import { StatisticsBalanceChart, StatisticsBlocks, StatisticsCurrenciesChart, StatisticsExpensesChart, StatisticsIncomesChart, useSubscribeOnTransactions } from '@/features/statistics'
 import { CreateTransactionButton } from '@/features/modify-transaction'
-import { useDisplayTransactions } from '@/features/display-transaction'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
-import { PieChartSetup } from '@/features/charts/setups/PieChartSetup'
 import { FloatingArea } from '@/shared/components/FloatingArea'
 import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { AppSidebar } from '@/widgets/AppSidebar'
@@ -17,13 +13,6 @@ import { Main } from '@/shared/components/Main'
 
 export function HomePage() {
   useSubscribeOnTransactions()
-  
-  const statisticsCurrenciesData = useStatisticsCurrenciesData()
-  const statisticsBalanceData = useStatisticsBalanceData()
-  const statisticsIncomesData = useStatisticsIncomesData()
-  const statisticsExpensesData = useStatisticsExpensesData()
-
-  const { formatAmountAsUSD } = useDisplayTransactions()
   
   return (
     <Page>
@@ -40,68 +29,19 @@ export function HomePage() {
           <Container>
             <StatisticsBlocks>
               <Palette round block>
-                <StatisticsBlock>
-                  <StatisticsBlockLabel>Currencies</StatisticsBlockLabel>
-  
-                  <StatisticsBlockContent>
-                    <PieChartSetup 
-                      data={statisticsCurrenciesData}
-                      valueFormatter={formatAmountAsUSD}
-                      colors={[ greenColor, redColor, primaryColor ]}
-                    />
-
-                    <StatisticsBlockCaption>
-                      {statisticsCurrenciesData.map((data, index) => (
-                        <div key={index}>
-                          {data.label}: {data.value} USD
-                        </div>
-                      ))}
-                    </StatisticsBlockCaption>
-                  </StatisticsBlockContent>
-                </StatisticsBlock>
+                <StatisticsCurrenciesChart />
               </Palette>
 
               <Palette round block>
-                <StatisticsBlock>
-                  <StatisticsBlockLabel>Balance</StatisticsBlockLabel>
-                  
-                  <LineChartSetup 
-                    data={statisticsBalanceData}
-                    displayValueKey='Balance'
-                    valueFormatter={formatAmountAsUSD}
-                    dataDomain={getOptimalDataDomain(...getPeaksFromSample(statisticsBalanceData.map(data => data.value)))}
-                    color={primaryColor}
-                    displayYAxis
-                  />
-                </StatisticsBlock>
+                <StatisticsBalanceChart />
               </Palette>
 
               <Palette round block>
-                <StatisticsBlock>
-                  <StatisticsBlockLabel>Incomes</StatisticsBlockLabel>
-  
-                  <BarChartSetup 
-                    data={statisticsIncomesData} 
-                    displayValueKey='Incomes' 
-                    valueFormatter={formatAmountAsUSD}
-                    color={greenColor} 
-                    displayYAxis
-                  />
-                </StatisticsBlock>
+                <StatisticsIncomesChart />
               </Palette>
 
               <Palette round block>
-                <StatisticsBlock>
-                  <StatisticsBlockLabel>Expenses</StatisticsBlockLabel>
-  
-                  <BarChartSetup 
-                    data={statisticsExpensesData} 
-                    displayValueKey='Expenses' 
-                    valueFormatter={formatAmountAsUSD}
-                    color={redColor} 
-                    displayYAxis
-                  />
-                </StatisticsBlock>
+                <StatisticsExpensesChart />
               </Palette>
             </StatisticsBlocks>
           </Container>

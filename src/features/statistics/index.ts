@@ -1,6 +1,10 @@
 export * from './statistics.store'
-
 export * from './hooks/use-subscribe-on-transactions'
+
+export * from './setups/StatisticsCurrenciesChart'
+export * from './setups/StatisticsBalanceChart'
+export * from './setups/StatisticsIncomesChart'
+export * from './setups/StatisticsExpensesChart'
 
 export * from './diagrams/balance'
 export * from './diagrams/incomes'

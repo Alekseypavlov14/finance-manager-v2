@@ -1,0 +1,24 @@
+.Currencies {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.CurrenciesLine {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.CurrenciesLabel {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--grey-200);
+  line-height: 1;
+}
+
+.CurrenciesValue {
+  font-size: 16px;
+  color: var(--grey-200);
+  line-height: 1;
+}
