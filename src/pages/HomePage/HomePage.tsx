@@ -1,4 +1,4 @@
-import { useStatisticsBalanceData, useStatisticsCurrenciesData, useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
+import { StatisticsBlock, StatisticsBlockLabel, StatisticsBlocks, useStatisticsBalanceData, useStatisticsCurrenciesData, useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
 import { BarChartSetup, getOptimalDataDomain, getPeaksFromSample, LineChartSetup } from '@/features/charts'
 import { greenColor, primaryColor, redColor } from '@/app/theme'
 import { CreateTransactionButton } from '@/features/modify-transaction'
@@ -38,38 +38,62 @@ export function HomePage() {
       
         <Main>
           <Container>
-            <Palette block round>
-              <PieChartSetup 
-                data={statisticsCurrenciesData}
-                valueFormatter={formatAmountAsUSD}
-                colors={[ greenColor, redColor, primaryColor ]}
-              />
+            <StatisticsBlocks>
+              <Palette round block>
+                <StatisticsBlock>
+                  <StatisticsBlockLabel>Currencies</StatisticsBlockLabel>
+  
+                  <PieChartSetup 
+                    data={statisticsCurrenciesData}
+                    valueFormatter={formatAmountAsUSD}
+                    colors={[ greenColor, redColor, primaryColor ]}
+                  />
+                </StatisticsBlock>
+              </Palette>
 
-              <LineChartSetup 
-                data={statisticsBalanceData}
-                displayValueKey='Balance'
-                valueFormatter={formatAmountAsUSD}
-                dataDomain={getOptimalDataDomain(...getPeaksFromSample(statisticsBalanceData.map(data => data.value)))}
-                color={primaryColor}
-                displayYAxis
-              />
+              <Palette round block>
+                <StatisticsBlock>
+                  <StatisticsBlockLabel>Balance</StatisticsBlockLabel>
+                  
+                  <LineChartSetup 
+                    data={statisticsBalanceData}
+                    displayValueKey='Balance'
+                    valueFormatter={formatAmountAsUSD}
+                    dataDomain={getOptimalDataDomain(...getPeaksFromSample(statisticsBalanceData.map(data => data.value)))}
+                    color={primaryColor}
+                    displayYAxis
+                  />
+                </StatisticsBlock>
+              </Palette>
 
-              <BarChartSetup 
-                data={statisticsIncomesData} 
-                displayValueKey='Incomes' 
-                valueFormatter={formatAmountAsUSD}
-                color={greenColor} 
-                displayYAxis
-              />
+              <Palette round block>
+                <StatisticsBlock>
+                  <StatisticsBlockLabel>Incomes</StatisticsBlockLabel>
+  
+                  <BarChartSetup 
+                    data={statisticsIncomesData} 
+                    displayValueKey='Incomes' 
+                    valueFormatter={formatAmountAsUSD}
+                    color={greenColor} 
+                    displayYAxis
+                  />
+                </StatisticsBlock>
+              </Palette>
 
-              <BarChartSetup 
-                data={statisticsExpensesData} 
-                displayValueKey='Expenses' 
-                valueFormatter={formatAmountAsUSD}
-                color={redColor} 
-                displayYAxis
-              />
-            </Palette>
+              <Palette round block>
+                <StatisticsBlock>
+                  <StatisticsBlockLabel>Expenses</StatisticsBlockLabel>
+  
+                  <BarChartSetup 
+                    data={statisticsExpensesData} 
+                    displayValueKey='Expenses' 
+                    valueFormatter={formatAmountAsUSD}
+                    color={redColor} 
+                    displayYAxis
+                  />
+                </StatisticsBlock>
+              </Palette>
+            </StatisticsBlocks>
           </Container>
         </Main>
 

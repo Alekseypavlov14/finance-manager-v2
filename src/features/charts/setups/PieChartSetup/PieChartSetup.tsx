@@ -1,4 +1,4 @@
-import { Cell, Pie, PieChart, Tooltip } from 'recharts'
+import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts'
 import { DEFAULT_CHART_HEIGHT } from '../../constants'
 import type { DataItem } from '../../types/data-item'
 import { textColor } from '@/app/theme'
@@ -59,6 +59,8 @@ export function PieChartSetup({
         itemStyle={{ color: tooltipColor }}
         formatter={valueFormatter}
       />
+
+      <Legend />
     </PieChart>
   )
 }

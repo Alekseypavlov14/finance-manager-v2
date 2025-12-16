@@ -6,3 +6,7 @@ export * from './diagrams/balance'
 export * from './diagrams/incomes'
 export * from './diagrams/expenses'
 export * from './diagrams/currencies'
+
+export * from './components/StatisticsBlocks'
+export * from './components/StatisticsBlock'
+export * from './components/StatisticsBlockLabel'
