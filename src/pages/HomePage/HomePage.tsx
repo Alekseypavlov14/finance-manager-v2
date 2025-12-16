@@ -1,4 +1,4 @@
-import { StatisticsBlock, StatisticsBlockLabel, StatisticsBlocks, useStatisticsBalanceData, useStatisticsCurrenciesData, useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
+import { StatisticsBlock, StatisticsBlockCaption, StatisticsBlockContent, StatisticsBlockLabel, StatisticsBlocks, useStatisticsBalanceData, useStatisticsCurrenciesData, useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
 import { BarChartSetup, getOptimalDataDomain, getPeaksFromSample, LineChartSetup } from '@/features/charts'
 import { greenColor, primaryColor, redColor } from '@/app/theme'
 import { CreateTransactionButton } from '@/features/modify-transaction'
@@ -43,11 +43,21 @@ export function HomePage() {
                 <StatisticsBlock>
                   <StatisticsBlockLabel>Currencies</StatisticsBlockLabel>
   
-                  <PieChartSetup 
-                    data={statisticsCurrenciesData}
-                    valueFormatter={formatAmountAsUSD}
-                    colors={[ greenColor, redColor, primaryColor ]}
-                  />
+                  <StatisticsBlockContent>
+                    <PieChartSetup 
+                      data={statisticsCurrenciesData}
+                      valueFormatter={formatAmountAsUSD}
+                      colors={[ greenColor, redColor, primaryColor ]}
+                    />
+
+                    <StatisticsBlockCaption>
+                      {statisticsCurrenciesData.map((data, index) => (
+                        <div key={index}>
+                          {data.label}: {data.value} USD
+                        </div>
+                      ))}
+                    </StatisticsBlockCaption>
+                  </StatisticsBlockContent>
                 </StatisticsBlock>
               </Palette>
 
