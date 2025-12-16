@@ -12,3 +12,15 @@ export function clamp(min: number, value: number, max: number) {
   if (value <= min) return min
   return value
 }
+
+export function round(value: number, step: number = 1) {
+  return Math.round(value / step) * step
+}
+
+export function ceil(value: number, step: number = 1) {
+  return Math.ceil(value / step) * step
+}
+
+export function floor(value: number, step: number = 1) {
+  return Math.floor(value / step) * step
+}

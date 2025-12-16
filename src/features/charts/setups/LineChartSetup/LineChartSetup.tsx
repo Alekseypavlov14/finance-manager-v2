@@ -1,4 +1,4 @@
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { getAdjustedTicks, getBalancedTicksIndexes } from '../../utils/get-adjusted-ticks'
 import { primaryColor, textColor } from '@/app/theme'
 import { DEFAULT_CHART_HEIGHT } from '../../constants'
@@ -16,6 +16,9 @@ interface LineChartSetupProps {
 
   displayHorizontalLines?: boolean
   displayVerticalLines?: boolean
+
+  horizontalReference?: number
+  displayHorizontalReferenceLine?: boolean
 
   tooltipColor?: string
   displayValueKey?: string
@@ -35,6 +38,9 @@ export function LineChartSetup({
 
   displayHorizontalLines = true,
   displayVerticalLines = false,
+
+  displayHorizontalReferenceLine = true,
+  horizontalReference = 0,
 
   tooltipColor = textColor,
   displayValueKey,
@@ -68,6 +74,10 @@ export function LineChartSetup({
             dataKey={'value'} 
             domain={dataDomain}
           />
+        ) : null}
+
+        {displayHorizontalReferenceLine ? (
+          <ReferenceLine y={horizontalReference} />
         ) : null}
   
         <Line 

@@ -1,6 +1,6 @@
 import { useStatisticsBalanceData, useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
 import { greenColor, primaryColor, redColor } from '@/app/theme'
-import { BarChartSetup, LineChartSetup } from '@/features/charts'
+import { BarChartSetup, getOptimalDataDomain, getPeaksFromSample, LineChartSetup } from '@/features/charts'
 import { CreateTransactionButton } from '@/features/modify-transaction'
 import { useDisplayTransactions } from '@/features/display-transaction'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
@@ -41,6 +41,7 @@ export function HomePage() {
                 data={statisticsBalanceData}
                 displayValueKey='Balance'
                 valueFormatter={formatAmountAsUSD}
+                dataDomain={getOptimalDataDomain(...getPeaksFromSample(statisticsBalanceData.map(data => data.value)))}
                 color={primaryColor}
                 displayYAxis
               />

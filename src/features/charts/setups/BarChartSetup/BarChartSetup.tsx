@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts'
 import { getAdjustedTicks, getBalancedTicksIndexes } from '../../utils/get-adjusted-ticks'
 import { primaryColor, textColor } from '@/app/theme'
 import { DEFAULT_CHART_HEIGHT } from '../../constants'
@@ -16,6 +16,9 @@ interface BarChartSetupProps {
 
   displayHorizontalLines?: boolean
   displayVerticalLines?: boolean
+
+  horizontalReference?: number
+  displayHorizontalReferenceLine?: boolean
 
   tooltipColor?: string
   displayValueKey?: string
@@ -35,6 +38,9 @@ export function BarChartSetup({
 
   displayHorizontalLines = true,
   displayVerticalLines = false,
+
+  displayHorizontalReferenceLine = true,
+  horizontalReference = 0,
 
   tooltipColor = textColor,
   displayValueKey,
@@ -67,6 +73,10 @@ export function BarChartSetup({
           dataKey={'value'} 
           domain={dataDomain}
         />
+      ) : null}
+
+      {displayHorizontalReferenceLine ? (
+        <ReferenceLine y={horizontalReference} />
       ) : null}
 
       <Bar 
