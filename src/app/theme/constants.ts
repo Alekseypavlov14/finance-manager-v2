@@ -2,6 +2,7 @@ import type { ThemeConfig } from 'antd'
 
 export const primaryColor = 'var(--primary)'
 export const greenColor = 'var(--green)'
+export const yellowColor = 'var(--yellow)'
 export const redColor = 'var(--red)'
 export const textColor = 'var(--grey-200)'
 

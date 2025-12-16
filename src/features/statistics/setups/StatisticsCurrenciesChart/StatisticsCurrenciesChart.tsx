@@ -1,4 +1,3 @@
-import { greenColor, redColor, primaryColor } from '@/app/theme'
 import { useStatisticsCurrenciesData } from '../../diagrams/currencies'
 import { StatisticsBlockCaption } from '../../components/StatisticsBlockCaption'
 import { StatisticsBlockContent } from '../../components/StatisticsBlockContent'
@@ -7,6 +6,7 @@ import { StatisticsBlockLabel } from '../../components/StatisticsBlockLabel'
 import { StatisticsBlock } from '../../components/StatisticsBlock'
 import { PieChartSetup } from '@/features/charts/setups/PieChartSetup'
 import { formatAsMoney } from '@/shared/utils/formatters'
+import { colorSequence } from '../../constants'
 import { USD_CURRENCY } from '@/entities/currency'
 import styles from './StatisticsCurrenciesChart.module.css'
 
@@ -22,7 +22,7 @@ export function StatisticsCurrenciesChart() {
         <PieChartSetup 
           data={statisticsCurrenciesData}
           valueFormatter={formatAmountAsUSD}
-          colors={[ greenColor, redColor, primaryColor ]}
+          colors={colorSequence}
         />
 
         <StatisticsBlockCaption>
