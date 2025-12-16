@@ -1,6 +1,7 @@
 import { type TransactionMoney } from '@/entities/transactions'
 import { useCurrenciesActions } from '@/entities/currency'
 import { useCurrencyRates } from '@/features/currencies-rates'
+import { sum } from '@/shared/utils/math'
 
 export function useStatisticApproaches() {
   const { getCurrencyRate } = useCurrencyRates()
@@ -19,7 +20,7 @@ export function useStatisticApproaches() {
       return amount
     })
   
-    const totalAmountInUSD = moneyAmountInUSD.reduce((total, current) => total + current, 0)
+    const totalAmountInUSD = sum(moneyAmountInUSD)
     return totalAmountInUSD
   }
 

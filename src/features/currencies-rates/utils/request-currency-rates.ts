@@ -1,6 +1,7 @@
 import { USD_CURRENCY, type CurrencyCode } from '@/entities/currency'
 import { RatesAPIRequestsHTTPClient } from '../api.client'
 import type { RatesRecord } from '../types/rates-record'
+import { average } from '@/shared/utils/math'
 
 export async function requestCurrencyRates(rateCodes: CurrencyCode[]): Promise<RatesRecord> {
   const rates: RatesRecord = {}
@@ -17,7 +18,7 @@ export async function requestCurrencyRates(rateCodes: CurrencyCode[]): Promise<R
     
     const rateMin = Number(response[responseKey]?.low) || 0
     const rateMax = Number(response[responseKey]?.high) || 0
-    const rateAverage = ((rateMin + rateMax) / 2) || 0
+    const rateAverage = average([ rateMin, rateMax ])
 
     rates[code] = rateAverage
   }))

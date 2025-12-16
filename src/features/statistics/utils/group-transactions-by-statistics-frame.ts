@@ -1,7 +1,7 @@
 import type { TransactionEntity } from '@/entities/transactions'
 import type { StatisticsGroup } from '../types/statistics-group'
 import { Range } from '@oleksii-pavlov/ranges'
-import { clamp } from '@/shared/utils/clamp'
+import { clamp } from '@/shared/utils/math'
 
 export interface GroupTransactionsByStatisticsFrameParams {
   transactions: TransactionEntity[]
