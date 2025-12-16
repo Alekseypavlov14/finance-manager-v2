@@ -54,6 +54,6 @@ body {
   overflow-x: clip;
 }
 
-svg, g {
+svg, g, path {
   outline: none;
 }
