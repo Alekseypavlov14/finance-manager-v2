@@ -1,5 +1,6 @@
+import { USD_CURRENCY, useCurrenciesActions } from '@/entities/currency'
 import { formatTransactionAmount } from '../utils/format-transaction-amount'
-import { useCurrenciesActions } from '@/entities/currency'
+import { formatAsMoney } from '@/shared/utils/formatters'
 import type { Id } from '@/shared/types/entity'
 
 export function useDisplayTransactions() {
@@ -12,7 +13,12 @@ export function useDisplayTransactions() {
     return `${formatTransactionAmount(amount)} ${currency.code}`
   }
 
+  function formatAmountAsUSD(amount: number) {
+    return `${formatAsMoney(amount)} ${USD_CURRENCY.code}`
+  }
+
   return ({
-    formatAmountWithCurrency
+    formatAmountAsUSD,
+    formatAmountWithCurrency,
   })
 }

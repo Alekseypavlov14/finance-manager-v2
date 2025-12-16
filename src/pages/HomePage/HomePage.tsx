@@ -1,9 +1,9 @@
-import { useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
+import { useStatisticsBalanceData, useStatisticsExpensesData, useStatisticsIncomesData, useSubscribeOnTransactions } from '@/features/statistics'
+import { greenColor, primaryColor, redColor } from '@/app/theme'
+import { BarChartSetup, LineChartSetup } from '@/features/charts'
 import { CreateTransactionButton } from '@/features/modify-transaction'
-import { greenColor, redColor } from '@/app/theme'
+import { useDisplayTransactions } from '@/features/display-transaction'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
-import { formatAsMoney } from '@/shared/utils/formatters'
-import { BarChartSetup } from '@/features/charts'
 import { FloatingArea } from '@/shared/components/FloatingArea'
 import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { AppSidebar } from '@/widgets/AppSidebar'
@@ -16,10 +16,13 @@ import { Main } from '@/shared/components/Main'
 
 export function HomePage() {
   useSubscribeOnTransactions()
-
+  
+  const statisticsBalanceData = useStatisticsBalanceData()
   const statisticsIncomesData = useStatisticsIncomesData()
   const statisticsExpensesData = useStatisticsExpensesData()
-
+  
+  const { formatAmountAsUSD } = useDisplayTransactions()
+  
   return (
     <Page>
       <Wrapper>
@@ -34,18 +37,28 @@ export function HomePage() {
         <Main>
           <Container>
             <Palette block round>
+              <LineChartSetup 
+                data={statisticsBalanceData}
+                displayValueKey='Balance'
+                valueFormatter={formatAmountAsUSD}
+                color={primaryColor}
+                displayYAxis
+              />
+
               <BarChartSetup 
                 data={statisticsIncomesData} 
                 displayValueKey='Incomes' 
-                valueFormatter={value => `${formatAsMoney(Number(value))} USD`}
+                valueFormatter={formatAmountAsUSD}
                 color={greenColor} 
+                displayYAxis
               />
 
               <BarChartSetup 
                 data={statisticsExpensesData} 
                 displayValueKey='Expenses' 
-                valueFormatter={value => `${formatAsMoney(Number(value))} USD`}
+                valueFormatter={formatAmountAsUSD}
                 color={redColor} 
+                displayYAxis
               />
             </Palette>
           </Container>

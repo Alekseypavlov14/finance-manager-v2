@@ -19,7 +19,7 @@ interface LineChartSetupProps {
 
   tooltipColor?: string
   displayValueKey?: string
-  valueFormatter?: (value: string) => string
+  valueFormatter?: (value: number) => string
 
   height?: number
   color?: string
@@ -51,14 +51,15 @@ export function LineChartSetup({
         className={styles.LineChartSetup}
         data={data}
 
-        margin={{ left: 5, top: 5 }}
+        margin={{ left: -15, top: 5 }}
         height={height}
         responsive
       >
         {displayXAxis ? (
           <XAxis
+            padding={{ left: 10, right: 10 }} 
+            dataKey={'label'}
             ticks={ticks}
-            dataKey={'label'} 
           />
         ) : null}
 
