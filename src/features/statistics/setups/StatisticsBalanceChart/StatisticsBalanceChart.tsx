@@ -1,8 +1,8 @@
-import { LineChartSetup, getOptimalDataDomain, getPeaksFromSample } from '@/features/charts'
 import { useStatisticsBalanceData } from '../../diagrams/balance'
 import { useDisplayTransactions } from '@/features/display-transaction'
 import { StatisticsBlockLabel } from '../../components/StatisticsBlockLabel'
 import { StatisticsBlock } from '../../components/StatisticsBlock'
+import { LineChartSetup } from '@/features/charts'
 import { primaryColor } from '@/app/theme'
 
 export function StatisticsBalanceChart() {
@@ -17,8 +17,8 @@ export function StatisticsBalanceChart() {
         data={statisticsBalanceData}
         displayValueKey='Balance'
         valueFormatter={formatAmountAsUSD}
-        dataDomain={getOptimalDataDomain(...getPeaksFromSample(statisticsBalanceData.map(data => data.value)))}
         color={primaryColor}
+        optimalDataDomain
         displayYAxis
       />
     </StatisticsBlock>

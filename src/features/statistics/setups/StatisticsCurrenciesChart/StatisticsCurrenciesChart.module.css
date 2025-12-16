@@ -22,3 +22,8 @@
   color: var(--grey-200);
   line-height: 1;
 }
+
+.CurrenciesFallback {
+  font-size: 14px;
+  color: var(--grey-500);
+}

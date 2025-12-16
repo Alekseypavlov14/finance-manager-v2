@@ -1,5 +1,6 @@
 import { Bar, BarChart, CartesianGrid, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts'
 import { getAdjustedTicks, getBalancedTicksIndexes } from '../../utils/get-adjusted-ticks'
+import { getOptimalDataDomainFromSample } from '../../utils/get-optimal-data-domain'
 import { primaryColor, textColor } from '@/app/theme'
 import { DEFAULT_CHART_HEIGHT } from '../../constants'
 import type { DataDomain } from '../../types/data-domain'
@@ -8,8 +9,9 @@ import styles from './BarChartSetup.module.css'
 
 interface BarChartSetupProps {
   data: DataItem[]
-  dataDomain?: DataDomain
   ticksIndexes?: number[]
+  dataDomain?: DataDomain
+  optimalDataDomain?: boolean
 
   displayXAxis?: boolean
   displayYAxis?: boolean
@@ -30,8 +32,9 @@ interface BarChartSetupProps {
 
 export function BarChartSetup({
   data,
-  dataDomain,
   ticksIndexes = getBalancedTicksIndexes(data.length),
+  dataDomain,
+  optimalDataDomain,
 
   displayXAxis = true,
   displayYAxis = false,
@@ -50,6 +53,7 @@ export function BarChartSetup({
   color = primaryColor,
 }: BarChartSetupProps) {
   const ticks = getAdjustedTicks(data.map(data => data.label), ticksIndexes)
+  const domain = optimalDataDomain ? getOptimalDataDomainFromSample(data) : dataDomain
 
   return (
     <BarChart 
@@ -71,7 +75,7 @@ export function BarChartSetup({
       {displayYAxis ? (
         <YAxis 
           dataKey={'value'} 
-          domain={dataDomain}
+          domain={domain}
         />
       ) : null}
 

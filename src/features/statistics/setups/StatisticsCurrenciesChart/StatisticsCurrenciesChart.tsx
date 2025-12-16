@@ -33,6 +33,10 @@ export function StatisticsCurrenciesChart() {
                 <div className={styles.CurrenciesValue}>{formatAsMoney(data.value)} {USD_CURRENCY.code}</div>
               </div>
             ))}
+
+            {statisticsCurrenciesData.length ? null : (
+              <div className={styles.CurrenciesFallback}>No data added</div>
+            )}
           </div>
         </StatisticsBlockCaption>
       </StatisticsBlockContent>

@@ -1,5 +1,6 @@
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { getAdjustedTicks, getBalancedTicksIndexes } from '../../utils/get-adjusted-ticks'
+import { getOptimalDataDomainFromSample } from '../../utils/get-optimal-data-domain'
 import { primaryColor, textColor } from '@/app/theme'
 import { DEFAULT_CHART_HEIGHT } from '../../constants'
 import type { DataDomain } from '../../types/data-domain'
@@ -8,8 +9,9 @@ import styles from './LineChartSetup.module.css'
 
 interface LineChartSetupProps {
   data: DataItem[]
-  dataDomain?: DataDomain
   ticksIndexes?: number[]
+  dataDomain?: DataDomain
+  optimalDataDomain?: boolean
 
   displayXAxis?: boolean
   displayYAxis?: boolean
@@ -30,8 +32,9 @@ interface LineChartSetupProps {
 
 export function LineChartSetup({
   data,
-  dataDomain,
   ticksIndexes = getBalancedTicksIndexes(data.length),
+  dataDomain,
+  optimalDataDomain,
 
   displayXAxis = true,
   displayYAxis = false,
@@ -50,6 +53,7 @@ export function LineChartSetup({
   color = primaryColor,
 }: LineChartSetupProps) {
   const ticks = getAdjustedTicks(data.map(data => data.label), ticksIndexes)
+  const domain = optimalDataDomain ? getOptimalDataDomainFromSample(data) : dataDomain
 
   return (
     <ResponsiveContainer height={height}>
@@ -72,7 +76,7 @@ export function LineChartSetup({
         {displayYAxis ? (
           <YAxis 
             dataKey={'value'} 
-            domain={dataDomain}
+            domain={domain}
           />
         ) : null}
 
