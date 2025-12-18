@@ -3,6 +3,7 @@ import { UpdateTransactionPage } from '@/pages/UpdateTransactionPage'
 import { TransactionsFeedPage } from '@/pages/TransactionsFeedPage'
 import { createBrowserRouter } from 'react-router-dom'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { SettingsPage } from '@/pages/SettingsPage'
 import { HomePage } from '@/pages/HomePage'
 
 export const routing = createBrowserRouter([
@@ -21,6 +22,10 @@ export const routing = createBrowserRouter([
   {
     path: '/transactions/feed',
     element: <TransactionsFeedPage />
+  },
+  {
+    path: '/settings',
+    element: <SettingsPage />
   },
   {
     path: '*',
