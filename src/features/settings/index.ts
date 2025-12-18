@@ -1,5 +1,7 @@
 // defines user settings for the application
 
+export * from './setups/SettingsForm'
+
 export * from './hooks/use-settings-persistence'
 export * from './settings.store'
 

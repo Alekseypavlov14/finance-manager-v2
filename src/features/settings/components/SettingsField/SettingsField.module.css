@@ -1,0 +1,9 @@
+.SettingsField {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.Inline {
+  flex-direction: row;
+  align-items: center;
+}

@@ -1,15 +1,14 @@
 import { transactionDateSelector, transactionDescriptionSelector, transactionLostSelector, transactionReceivedSelector, transactionTypeSelector, updateTransactionDateSelector, updateTransactionDescriptionSelector, updateTransactionLostAmountSelector, updateTransactionLostCurrencyIdSelector, updateTransactionReceivedAmountSelector, updateTransactionReceivedCurrencyIdSelector, updateTransactionTypeSelector, useTransactionFormStore } from '../../transaction-form.store'
 import { losingTransactionTypes, receivingTransactionTypes, transactionTypes, type TransactionData } from '@/entities/transactions'
-import { currenciesSelector, useCurrenciesStore } from '@/entities/currency'
+import { currenciesSelector, getCurrencyOption, useCurrenciesStore } from '@/entities/currency'
+import { DatePicker, Input, InputNumber, Select } from 'antd'
 import { convertDayjsToMilliseconds } from '@/shared/utils/datetime'
-import { DatePicker, Input, Select } from 'antd'
 import { useLoadInitialData } from '../../hooks/use-load-initial-data'
 import { FieldColumn } from '@/shared/components/FieldColumn'
+import type { Option } from '@/shared/types/option'
 import { FieldLabel } from '@/shared/components/FieldLabel'
 import { Field } from '@/shared/components/Field'
 import { Form } from '@/shared/components/Form'
-import type { Option } from '@/shared/types/option'
-import type { Id } from '@/shared/types/entity'
 import dayjs from 'dayjs'
 import styles from './TransactionForm.module.css'
 
@@ -39,7 +38,7 @@ export function TransactionForm({
   const transactionTypeOptions = transactionTypes.map<Option<string>>(transactionType => ({ label: transactionType, value: transactionType }))
 
   const currencies = useCurrenciesStore(currenciesSelector)
-  const currencyOptions = currencies.map<Option<Id>>(currency => ({ label: currency.code, value: currency.id }))
+  const currencyOptions = currencies.map(getCurrencyOption)
 
   return (
     <Form>
@@ -58,9 +57,9 @@ export function TransactionForm({
           <FieldLabel>Received:</FieldLabel>
 
           <FieldColumn>
-            <Input 
+            <InputNumber 
               value={transactionReceived.amount}
-              onChange={(e) => updateTransactionReceivedAmount(parseFloat(e.target.value) || 0)}
+              onChange={(value) => updateTransactionReceivedAmount(value ?? 0)}
             />
 
             <Select 
@@ -78,9 +77,9 @@ export function TransactionForm({
           <FieldLabel>Lost:</FieldLabel>
 
           <FieldColumn>
-            <Input 
+            <InputNumber 
               value={transactionLost.amount}
-              onChange={(e) => updateTransactionLostAmount(parseFloat(e.target.value) || 0)}
+              onChange={(value) => updateTransactionLostAmount(value ?? 0)}
             />
 
             <Select 
