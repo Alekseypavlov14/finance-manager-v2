@@ -2,6 +2,7 @@ import { CreateTransactionPage } from '@/pages/CreateTransactionPage'
 import { UpdateTransactionPage } from '@/pages/UpdateTransactionPage'
 import { TransactionsFeedPage } from '@/pages/TransactionsFeedPage'
 import { createBrowserRouter } from 'react-router-dom'
+import { CurrenciesPage } from '@/pages/CurrenciesPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { SettingsPage } from '@/pages/SettingsPage'
 import { HomePage } from '@/pages/HomePage'
@@ -12,6 +13,10 @@ export const routing = createBrowserRouter([
     element: <HomePage />
   },
   {
+    path: '/transactions/feed',
+    element: <TransactionsFeedPage />
+  },
+  {
     path: '/transactions/create',
     element: <CreateTransactionPage />
   },
@@ -20,8 +25,8 @@ export const routing = createBrowserRouter([
     element: <UpdateTransactionPage />
   },
   {
-    path: '/transactions/feed',
-    element: <TransactionsFeedPage />
+    path: '/currencies',
+    element: <CurrenciesPage />
   },
   {
     path: '/settings',

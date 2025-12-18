@@ -1,0 +1,28 @@
+.CurrenciesFormItem {
+  display: flex;
+  gap: 10px;
+
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--grey-700);
+}
+
+.Control {
+  flex: 1 1 auto;
+}
+
+.Delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+
+  border: 1px solid var(--grey-700);
+  border-radius: 5px;
+
+  background-color: var(--white);
+  color: var(--red);
+  line-height: 1;
+
+  cursor: pointer;
+  outline: none;
+}

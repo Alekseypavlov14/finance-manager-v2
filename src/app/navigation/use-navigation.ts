@@ -9,6 +9,7 @@ export function useNavigation() {
     navigateTransactionsFeedPage: () => navigate('/transactions/feed'),
     navigateCreateTransactionPage: () => navigate('/transactions/create'),
     navigateUpdateTransactionPage: (id: Id) => navigate(`/transactions/${id}/update`),
+    navigateCurrenciesPage: () => navigate('/currencies'),
     navigateSettingsPage: () => navigate('/settings')
   })
 }
