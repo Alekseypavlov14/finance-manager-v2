@@ -1,7 +1,7 @@
 import { formatTransactionDate, Transaction, TransactionAmount, TransactionComment, TransactionDate, TransactionRow, useDisplayTransactions } from '@/features/display-transaction'
-import { losingTransactionTypes, receivingTransactionTypes, transactionTypeDeposit, transactionTypeWithdraw } from '@/entities/transactions'
-import { currentPageSelector, totalPagesSelector, updateCurrentPageSelector } from '@/shared/utils/pagination'
-import { displayTransactionsCommentsSelector, useSettingsStore } from '@/features/settings'
+import { losingTransactionTypes, receivingTransactionTypes, transactionsSelector, transactionTypeDeposit, transactionTypeWithdraw, useTransactionsStore } from '@/entities/transactions'
+import { displayTransactionsAmountSelector, displayTransactionsCommentsSelector, useSettingsStore } from '@/features/settings'
+import { currentPageSelector, updateCurrentPageSelector } from '@/shared/utils/pagination'
 import { groupingModeSelector, useTransactionsFeedStore } from '../../transactions-feed.store'
 import { mapTransactionGroupingModeToLabelStrategy } from '../../constants'
 import { useTransactionsFeedPaginationStore } from '../../transactions-feed-pagination.store'
@@ -19,20 +19,20 @@ import styles from './TransactionsFeed.module.css'
 export function TransactionsFeed() {
   useSubscribeOnTransactions()
 
+  const transactions = useTransactionsStore(transactionsSelector)
   const { navigateUpdateTransactionPage } = useNavigation()
 
   const transactionGroups = useTransactionsGroups()
   const { formatAmountWithCurrency } = useDisplayTransactions()
 
   const currentPage = useTransactionsFeedPaginationStore(currentPageSelector)
-  const totalPages = useTransactionsFeedPaginationStore(totalPagesSelector)
-
   const updateCurrentPage = useTransactionsFeedPaginationStore(updateCurrentPageSelector)
 
   const transactionsGroupingMode = useTransactionsFeedStore(groupingModeSelector)
   const labelFormatter = mapTransactionGroupingModeToLabelStrategy[transactionsGroupingMode]
 
   const displayTransactionsComments = useSettingsStore(displayTransactionsCommentsSelector)
+  const displayTransactionsAmount = useSettingsStore(displayTransactionsAmountSelector)
 
   return (
     <div className={styles.TransactionsFeed}>
@@ -83,10 +83,12 @@ export function TransactionsFeed() {
       </TransactionsGroups>
 
       <Pagination 
-        current={currentPage}
-        total={totalPages}
-        onChange={updateCurrentPage}
+        current={currentPage + 1}
+        pageSize={displayTransactionsAmount}
+        total={transactions.length}
+        onChange={(page) => updateCurrentPage(page - 1)}
         hideOnSinglePage
+        align='center'
       />
     </div>
   )

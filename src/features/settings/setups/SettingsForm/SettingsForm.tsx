@@ -27,7 +27,7 @@ export function SettingsForm() {
       <SettingsField inline>
         <Checkbox 
           id={displayTransactionsCommentsId}
-          value={displayTransactionsComments}
+          checked={displayTransactionsComments}
           onChange={(e) => updateDisplayTransactionsComments(e.target.checked)} 
         />
 
