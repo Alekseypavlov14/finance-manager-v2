@@ -20,8 +20,8 @@ export function NumberInput({
   const [controlValue, setControlValue] = useState<string>(String(value))
 
   function changeHandler(e: ChangeEvent<HTMLInputElement>) {
-    setControlValue(e.target.value)
-    onChange(Number(e.target.value) || defaultValue)
+    setControlValue(e.target.value.trim())
+    onChange(Number(e.target.value.trim()) || defaultValue)
   }
 
   return (

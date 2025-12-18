@@ -1,6 +1,6 @@
-import { create } from 'zustand'
-import type { CurrencyEntity } from './currency.entity'
 import { currenciesLocalStorage } from './currencies.storage'
+import type { CurrencyEntity } from './currency.entity'
+import { create } from 'zustand'
 
 export interface CurrenciesState {
   currencies: CurrencyEntity[]
@@ -18,4 +18,4 @@ export const useCurrenciesStore = create<CurrenciesStore>(set => ({
 }))
 
 export const currenciesSelector = (store: CurrenciesStore) => store.currencies
-export const updateCurrencies = (store: CurrenciesStore) => store.updateCurrencies
+export const updateCurrenciesSelector = (store: CurrenciesStore) => store.updateCurrencies

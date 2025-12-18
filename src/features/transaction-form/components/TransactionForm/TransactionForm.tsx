@@ -97,7 +97,7 @@ export function TransactionForm({
         <FieldLabel>Transaction description:</FieldLabel>
 
         <Input 
-          onChange={e => updateTransactionDescription(e.target.value)}
+          onChange={e => updateTransactionDescription(e.target.value.trim())}
           value={transactionDescription}
         />
       </Field>
