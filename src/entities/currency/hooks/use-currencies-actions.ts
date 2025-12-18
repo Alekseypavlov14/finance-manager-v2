@@ -1,6 +1,7 @@
 import { currenciesSelector, updateCurrenciesSelector, useCurrenciesStore } from '../currencies.store'
 import type { CurrencyData, CurrencyEntity } from '../currency.entity'
 import type { Nullable } from '@/shared/types/nullable'
+import { generateId } from '@/shared/utils/id'
 import type { Id } from '@/shared/types/entity'
 
 export function useCurrenciesActions() {
@@ -9,6 +10,13 @@ export function useCurrenciesActions() {
 
   function getCurrencyById(id: Id): Nullable<CurrencyEntity> {
     return currencies.find(currency => currency.id === id) ?? null
+  }
+
+  function createCurrency(data: CurrencyData) {
+    const newCurrency: CurrencyEntity = { id: generateId(), ...data }
+    const newCurrencies = currencies.concat(newCurrency)
+    updateCurrencies(newCurrencies)
+    return newCurrency
   }
 
   function updateCurrencyById(id: Id, data: Partial<CurrencyData> = {}) {
@@ -32,6 +40,7 @@ export function useCurrenciesActions() {
 
   return ({
     getCurrencyById,
+    createCurrency,
     updateCurrencyById,
     deleteCurrencyById,
   })
