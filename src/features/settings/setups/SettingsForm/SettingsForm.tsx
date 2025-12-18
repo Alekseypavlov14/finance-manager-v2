@@ -1,9 +1,10 @@
 import { displayTransactionsAmountSelector, displayTransactionsCommentsSelector, referenceCurrencyIdSelector, updateDisplayTransactionsAmountSelector, updateDisplayTransactionsCommentsSelector, updateReferenceCurrencyIdSelector, useSettingsStore } from '../../settings.store'
 import { currenciesSelector, getCurrencyOption, useCurrenciesStore } from '@/entities/currency'
-import { Checkbox, InputNumber, Select } from 'antd'
 import { SettingsFieldLabel } from '../../components/SettingsFieldLabel'
+import { Checkbox, Select } from 'antd'
 import { defaultSettings } from '../../constants'
 import { SettingsField } from '../../components/SettingsField'
+import { NumberInput } from '@/shared/components/NumberInput'
 import styles from './SettingsForm.module.css'
 
 export function SettingsForm() {
@@ -41,10 +42,11 @@ export function SettingsForm() {
           Display transactions per page
         </SettingsFieldLabel>
 
-        <InputNumber 
+        <NumberInput 
           id={displayTransactionsAmountId}
           value={displayTransactionsAmount}
-          onChange={(value) => updateDisplayTransactionsAmount(value ?? defaultSettings.displayTransactionsAmount)}
+          defaultValue={defaultSettings.displayTransactionsAmount}
+          onChange={updateDisplayTransactionsAmount}
           className={styles.Control}
         />
       </SettingsField>

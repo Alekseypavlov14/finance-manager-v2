@@ -1,11 +1,12 @@
 import { transactionDateSelector, transactionDescriptionSelector, transactionLostSelector, transactionReceivedSelector, transactionTypeSelector, updateTransactionDateSelector, updateTransactionDescriptionSelector, updateTransactionLostAmountSelector, updateTransactionLostCurrencyIdSelector, updateTransactionReceivedAmountSelector, updateTransactionReceivedCurrencyIdSelector, updateTransactionTypeSelector, useTransactionFormStore } from '../../transaction-form.store'
 import { losingTransactionTypes, receivingTransactionTypes, transactionTypes, type TransactionData } from '@/entities/transactions'
 import { currenciesSelector, getCurrencyOption, useCurrenciesStore } from '@/entities/currency'
-import { DatePicker, Input, InputNumber, Select } from 'antd'
 import { convertDayjsToMilliseconds } from '@/shared/utils/datetime'
+import { DatePicker, Input, Select } from 'antd'
 import { useLoadInitialData } from '../../hooks/use-load-initial-data'
 import { FieldColumn } from '@/shared/components/FieldColumn'
 import type { Option } from '@/shared/types/option'
+import { NumberInput } from '@/shared/components/NumberInput'
 import { FieldLabel } from '@/shared/components/FieldLabel'
 import { Field } from '@/shared/components/Field'
 import { Form } from '@/shared/components/Form'
@@ -57,9 +58,9 @@ export function TransactionForm({
           <FieldLabel>Received:</FieldLabel>
 
           <FieldColumn>
-            <InputNumber 
+            <NumberInput 
               value={transactionReceived.amount}
-              onChange={(value) => updateTransactionReceivedAmount(value ?? 0)}
+              onChange={updateTransactionReceivedAmount}
             />
 
             <Select 
@@ -77,9 +78,9 @@ export function TransactionForm({
           <FieldLabel>Lost:</FieldLabel>
 
           <FieldColumn>
-            <InputNumber 
+            <NumberInput 
               value={transactionLost.amount}
-              onChange={(value) => updateTransactionLostAmount(value ?? 0)}
+              onChange={updateTransactionLostAmount}
             />
 
             <Select 
