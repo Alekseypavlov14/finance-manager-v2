@@ -4,6 +4,7 @@ import { currenciesSelector, getCurrencyOption, useCurrenciesStore } from '@/ent
 import { convertDayjsToMilliseconds } from '@/shared/utils/datetime'
 import { DatePicker, Input, Select } from 'antd'
 import { useLoadInitialData } from '../../hooks/use-load-initial-data'
+import { useDependencies } from '../../hooks/use-dependencies'
 import { FieldColumn } from '@/shared/components/FieldColumn'
 import type { Option } from '@/shared/types/option'
 import { NumberInput } from '@/shared/components/NumberInput'
@@ -21,6 +22,7 @@ export function TransactionForm({
   initialTransactionData,
 }: TransactionFormProps) {
   useLoadInitialData(initialTransactionData)
+  useDependencies()
 
   const transactionType = useTransactionFormStore(transactionTypeSelector)
   const transactionDescription = useTransactionFormStore(transactionDescriptionSelector)
