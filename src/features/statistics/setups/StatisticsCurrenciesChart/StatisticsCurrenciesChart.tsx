@@ -1,5 +1,4 @@
 import { useStatisticsCurrenciesData } from '../../diagrams/currencies'
-import { StatisticsBlockCaption } from '../../components/StatisticsBlockCaption'
 import { StatisticsBlockContent } from '../../components/StatisticsBlockContent'
 import { useDisplayTransactions } from '@/features/display-transaction'
 import { StatisticsBlockLabel } from '../../components/StatisticsBlockLabel'
@@ -24,21 +23,28 @@ export function StatisticsCurrenciesChart() {
           valueFormatter={formatAmountAsUSD}
           colors={colorSequence}
         />
+      </StatisticsBlockContent>
 
-        <StatisticsBlockCaption>
-          <div className={styles.Currencies}>
-            {statisticsCurrenciesData.map((data, index) => (
-              <div className={styles.CurrenciesLine} key={index}>
-                <div className={styles.CurrenciesLabel}>{data.label}:</div> 
-                <div className={styles.CurrenciesValue}>{formatAsMoney(data.value)} {USD_CURRENCY.code}</div>
+      <StatisticsBlockContent>
+        <div className={styles.Currencies}>
+          {statisticsCurrenciesData.map((data, index) => (
+            <div className={styles.CurrenciesLine} key={index}>
+              <div className={styles.CurrenciesLabel}>{data.label}:</div> 
+
+              <div className={styles.CurrenciesValue}>
+                {formatAsMoney(data.real)}&nbsp;{data.label} 
               </div>
-            ))}
+              
+              <div className={styles.CurrenciesReal}>
+                {formatAsMoney(data.value)}&nbsp;{USD_CURRENCY.code} 
+              </div>
+            </div>
+          ))}
 
-            {statisticsCurrenciesData.length ? null : (
-              <div className={styles.CurrenciesFallback}>No data added</div>
-            )}
-          </div>
-        </StatisticsBlockCaption>
+          {statisticsCurrenciesData.length ? null : (
+            <div className={styles.CurrenciesFallback}>No data added</div>
+          )}
+        </div>
       </StatisticsBlockContent>
     </StatisticsBlock>
   )

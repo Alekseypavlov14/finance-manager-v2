@@ -2,6 +2,7 @@ import { transactionsSelector, useTransactionsStore } from '@/entities/transacti
 import type { StatisticsCurrenciesDataItem } from './data-item'
 import { useCurrenciesActions } from '@/entities/currency'
 import { useCurrencyRates } from '@/features/currencies-rates'
+import type { Nullable } from '@/shared/types/nullable'
 import type { Id } from '@/shared/types/entity'
 import { sum } from '@/shared/utils/math'
 
@@ -15,7 +16,7 @@ export function useStatisticsCurrenciesData() {
     transaction.lost.currencyId
   ]).flat()))
 
-  const currenciesGroups: StatisticsCurrenciesDataItem[] = currencyIds.map(currencyId => {
+  const currenciesGroups: StatisticsCurrenciesDataItem[] = currencyIds.map<Nullable<StatisticsCurrenciesDataItem>>(currencyId => {
     const currency = getCurrencyById(currencyId)
     if (!currency) return null
 
@@ -33,6 +34,7 @@ export function useStatisticsCurrenciesData() {
 
     return ({
       value: currencyAmountInUSD,
+      real: currencyBalance,
       label: currency.code,
     })
   }).filter(Boolean) as StatisticsCurrenciesDataItem[]
