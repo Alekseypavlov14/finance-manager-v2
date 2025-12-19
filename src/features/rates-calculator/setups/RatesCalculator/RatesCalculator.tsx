@@ -1,6 +1,7 @@
 import { destinationAmountSelector, destinationCurrencyIdSelector, sourceAmountSelector, sourceCurrencyIdSelector, updateDestinationAmountSelector, updateDestinationCurrencyIdSelector, updateSourceAmountSelector, updateSourceCurrencyIdSelector, useRatesCalculatorStore } from '../../rates-calculator.store'
 import { currenciesSelector, getCurrencyOption, useCurrenciesStore } from '@/entities/currency'
 import { useRatesCalculator } from '../../hooks/use-rates-calculator'
+import { roundAsMoney } from '@/shared/utils/formatters'
 import { NumberInput } from '@/shared/components/NumberInput'
 import { Select } from 'antd'
 import styles from './RatesCalculator.module.css'
@@ -29,7 +30,7 @@ export function RatesCalculator() {
 
       <div className={styles.RatesCalculatorLine}>
         <NumberInput 
-          value={sourceAmount}
+          value={roundAsMoney(sourceAmount)}
           onChange={updateSourceAmount}
           className={styles.Input}
         />
@@ -44,7 +45,7 @@ export function RatesCalculator() {
 
       <div className={styles.RatesCalculatorLine}>
         <NumberInput 
-          value={destinationAmount}
+          value={roundAsMoney(destinationAmount)}
           onChange={updateDestinationAmount}
           className={styles.Input}
         />

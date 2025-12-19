@@ -1,6 +1,5 @@
 import { destinationAmountSelector, destinationCurrencyIdSelector, sourceAmountSelector, sourceCurrencyIdSelector, updateDestinationAmountSelector, updateSourceAmountSelector, useRatesCalculatorStore } from '../rates-calculator.store'
 import { useCurrencyRates } from '@/features/currencies-rates'
-import { roundAsMoney } from '@/shared/utils/formatters'
 import { useEffect } from 'react'
 
 export function useRatesCalculator() {
@@ -20,7 +19,7 @@ export function useRatesCalculator() {
     if (!sourceCurrencyRate || !destinationCurrencyRate) return updateDestinationAmount(0)
 
     const newDestinationAmount = sourceAmount / sourceCurrencyRate * destinationCurrencyRate
-    updateDestinationAmount(roundAsMoney(newDestinationAmount))
+    updateDestinationAmount(newDestinationAmount)
   }, [sourceAmount, sourceCurrencyId, destinationCurrencyId])
 
   useEffect(() => {
@@ -29,6 +28,6 @@ export function useRatesCalculator() {
     if (!sourceCurrencyRate || !destinationCurrencyRate) return updateSourceAmount(0)
 
     const newSourceAmount = destinationAmount / destinationCurrencyRate * sourceCurrencyRate
-    updateSourceAmount(roundAsMoney(newSourceAmount))
+    updateSourceAmount(newSourceAmount)
   }, [destinationAmount])
 }
