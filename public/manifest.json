@@ -1,0 +1,17 @@
+{
+  "name": "Budget Dashboard",
+  "short_name": "Budget Dashboard",
+  "description": "An app to manage your finances efficiently",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F9F9F9",
+  "theme_color": "#7F78FF",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "40x40",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["finance", "productivity", "tools"]
+}
