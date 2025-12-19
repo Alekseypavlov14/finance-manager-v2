@@ -13,8 +13,11 @@ export function getOptimalDataDomainFromSample(data: DataItem[]): DataDomain {
 export function getOptimalDataDomain(domain: DataDomain, step: number = DEFAULT_DOMAIN_STEP, offset: number = DEFAULT_OFFSET): DataDomain {
   const [ min, max ] = domain  
 
-  const adjustedMin = min - Math.abs(max - min) * offset
-  const adjustedMax = max + Math.abs(max - min) * offset
+  const amplitude = Math.abs(max - min)
+  const reference = amplitude || min
+
+  const adjustedMin = min - reference * offset
+  const adjustedMax = max + reference * offset
 
   const roundedMin = round(adjustedMin, step)
   const roundedMax = round(adjustedMax, step)
