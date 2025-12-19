@@ -3,6 +3,7 @@ import { CurrenciesForm } from '@/features/modify-currencies'
 import { HeaderLogo } from '@/widgets/HeaderLogo'
 import { AppSidebar } from '@/widgets/AppSidebar'
 import { Container } from '@/shared/components/Container'
+import { Palette } from '@/shared/components/Palette'
 import { Wrapper } from '@/shared/components/Wrapper'
 import { Header } from '@/shared/components/Header'
 import { Main } from '@/shared/components/Main'
@@ -22,7 +23,9 @@ export function CurrenciesPage() {
 
         <Main>
           <Container>
-            <CurrenciesForm />
+            <Palette round block>
+              <CurrenciesForm />
+            </Palette>
           </Container>
         </Main>
       </Wrapper>

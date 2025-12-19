@@ -19,7 +19,6 @@ export function StatisticsBalanceChart() {
         valueFormatter={formatAmountAsUSD}
         color={primaryColor}
         optimalDataDomain
-        displayYAxis
       />
     </StatisticsBlock>
   )

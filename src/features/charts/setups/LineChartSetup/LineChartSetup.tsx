@@ -73,12 +73,11 @@ export function LineChartSetup({
           />
         ) : null}
 
-        {displayYAxis ? (
-          <YAxis 
-            dataKey={'value'} 
-            domain={domain}
-          />
-        ) : null}
+        <YAxis 
+          dataKey={'value'} 
+          domain={domain}
+          hide={!displayYAxis}
+        />
 
         {displayHorizontalReferenceLine ? (
           <ReferenceLine y={horizontalReference} />

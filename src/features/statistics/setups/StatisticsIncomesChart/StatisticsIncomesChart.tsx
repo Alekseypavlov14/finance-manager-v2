@@ -18,7 +18,6 @@ export function StatisticsIncomesChart() {
         displayValueKey='Incomes' 
         valueFormatter={formatAmountAsUSD}
         color={greenColor} 
-        displayYAxis
       />
     </StatisticsBlock>
   )
