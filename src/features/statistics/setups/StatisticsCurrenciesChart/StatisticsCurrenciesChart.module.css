@@ -1,5 +1,6 @@
 .Currencies {
   width: 100%;
+  margin-top: 10px;
 
   display: flex;
   flex-direction: column;
@@ -26,12 +27,17 @@
   font-size: 16px;
   color: var(--grey-200);
   line-height: 1;
+
+  font-family: 'Roboto Mono';
+  text-align: right;
 }
 
-.CurrenciesReal {
-  font-size: 16px;
-  color: var(--grey-200);
-  line-height: 1;
+.CurrenciesValue strong {
+  font-weight: 500;
+}
+
+.Total {
+  padding-top: 10px;
 }
 
 .CurrenciesFallback {

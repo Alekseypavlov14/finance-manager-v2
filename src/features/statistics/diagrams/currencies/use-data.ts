@@ -3,7 +3,9 @@ import type { StatisticsCurrenciesDataItem } from './data-item'
 import { useCurrenciesActions } from '@/entities/currency'
 import { useCurrencyRates } from '@/features/currencies-rates'
 import type { Nullable } from '@/shared/types/nullable'
+import { Collection } from '@oleksii-pavlov/collections'
 import type { Id } from '@/shared/types/entity'
+import { unique } from '@/shared/utils/arrays'
 import { sum } from '@/shared/utils/math'
 
 export function useStatisticsCurrenciesData() {
@@ -11,10 +13,10 @@ export function useStatisticsCurrenciesData() {
   const { getCurrencyById } = useCurrenciesActions()
   const { getCurrencyRate } = useCurrencyRates()
 
-  const currencyIds: Id[] = Array.from(new Set(transactions.map(transaction => [
+  const currencyIds: Id[] = unique(transactions.map(transaction => [
     transaction.received.currencyId, 
     transaction.lost.currencyId
-  ]).flat()))
+  ]).flat())
 
   const currenciesGroups: StatisticsCurrenciesDataItem[] = currencyIds.map<Nullable<StatisticsCurrenciesDataItem>>(currencyId => {
     const currency = getCurrencyById(currencyId)
@@ -39,5 +41,7 @@ export function useStatisticsCurrenciesData() {
     })
   }).filter(Boolean) as StatisticsCurrenciesDataItem[]
 
-  return currenciesGroups
+  const sortedCurrenciesGroups = new Collection(currenciesGroups).sortDescendingBy(group => group.value).getItems()
+
+  return sortedCurrenciesGroups
 }
