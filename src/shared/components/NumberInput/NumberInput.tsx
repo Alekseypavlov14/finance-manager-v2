@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from 'react'
+import { useEffect, useState, type ChangeEvent } from 'react'
 import { Input, type InputProps } from 'antd'
 import styles from './NumberInput.module.css'
 import clsx from 'clsx'
@@ -18,6 +18,7 @@ export function NumberInput({
   ...props 
 }: NumberInputProps) {
   const [controlValue, setControlValue] = useState<string>(String(value))
+  useEffect(() => setControlValue(String(value)), [value])
 
   function changeHandler(e: ChangeEvent<HTMLInputElement>) {
     setControlValue(e.target.value.trim())

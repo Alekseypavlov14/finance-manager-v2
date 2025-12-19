@@ -1,0 +1,24 @@
+.RatesCalculator {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--grey-200);
+}
+
+.RatesCalculatorLine {
+  display: flex;
+  gap: 10px;
+}
+
+.Input {
+  flex: 1 1 auto;
+}
+
+.Select {
+  flex: 0 0 70px;
+}
