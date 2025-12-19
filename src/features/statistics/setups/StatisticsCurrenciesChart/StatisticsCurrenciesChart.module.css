@@ -26,6 +26,7 @@
 .CurrenciesValue {
   font-size: 16px;
   color: var(--grey-200);
+  letter-spacing: -0.5px;
   line-height: 1;
 
   font-family: 'Roboto Mono';

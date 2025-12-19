@@ -38,10 +38,20 @@ export function useStatisticsCurrenciesData() {
       value: currencyAmountInUSD,
       real: currencyBalance,
       label: currency.code,
+      percent: 0,
     })
   }).filter(Boolean) as StatisticsCurrenciesDataItem[]
 
   const sortedCurrenciesGroups = new Collection(currenciesGroups).sortDescendingBy(group => group.value).getItems()
 
-  return sortedCurrenciesGroups
+  const totalAmount = sum(sortedCurrenciesGroups.map(group => group.value))
+  const completedSortedCurrenciesGroups = sortedCurrenciesGroups.map(group => ({
+    ...group,
+    percent: (group.value / totalAmount) || 0
+  }))
+
+  return ({
+    groups: completedSortedCurrenciesGroups,
+    total: totalAmount,
+  })
 }
