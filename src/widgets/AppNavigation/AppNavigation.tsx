@@ -14,6 +14,7 @@ export function AppNavigation() {
       <Link className={styles.Link} onClick={closeSidebar} to='/'>Home</Link>
       <Link className={styles.Link} onClick={closeSidebar} to='/transactions/feed'>Transactions</Link>
       <Link className={styles.Link} onClick={closeSidebar} to='/transactions/create'>Create transaction</Link>
+      <Link className={styles.Link} onClick={closeSidebar} to='/currencies'>Currencies</Link>
       <Link className={styles.Link} onClick={closeSidebar} to='/settings'>Settings</Link>
     </div>
   )

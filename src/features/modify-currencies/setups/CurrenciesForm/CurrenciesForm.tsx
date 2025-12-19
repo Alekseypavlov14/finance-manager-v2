@@ -31,14 +31,38 @@ export function CurrenciesForm() {
     createDeleteCurrencyHandlerById, 
   } = useCurrenciesFormActions()
 
-  const { createWarningNotification } = useNotifications()
+  const { 
+    createSuccessNotification, 
+    createWarningNotification,
+    createInfoNotifications, 
+  } = useNotifications()
 
   function createComposedDeleteHandlerById(id: Id) {
     const deleteHandler = createDeleteCurrencyHandlerById(id)
 
     return () => {
       if (!isDeletableById(id)) return createWarningNotification('This currency is in use')
+      
       deleteHandler()
+      createInfoNotifications('The currency is deleted')
+    }
+  }
+
+  function createSaveCreatingCurrencyHandlerByIndex(index: number) {
+    const saveHandler = createSaveNewCurrencyByIndexHandler(index)
+
+    return () => {
+      saveHandler()
+      createSuccessNotification('The currency is created')
+    }
+  }
+
+  function createClearCreatingCurrencyHandlerByIndex(index: number) {
+    const clearHandler = createClearCreatingCurrencyByIndex(index)
+
+    return () => {
+      clearHandler()
+      createInfoNotifications('The currency is cleared')
     }
   }
 
@@ -79,11 +103,11 @@ export function CurrenciesForm() {
             onChange={createInputHandler(createUpdateCreatingCurrencyCodeByIndex(index))}
           />
 
-          <CurrenciesFormItemButton onClick={createSaveNewCurrencyByIndexHandler(index)}>
+          <CurrenciesFormItemButton onClick={createSaveCreatingCurrencyHandlerByIndex(index)}>
             <img src={checkIcon} />
           </CurrenciesFormItemButton>
 
-          <CurrenciesFormItemButton onClick={createClearCreatingCurrencyByIndex(index)}>
+          <CurrenciesFormItemButton onClick={createClearCreatingCurrencyHandlerByIndex(index)}>
             <img src={crossIcon} />
           </CurrenciesFormItemButton>
         </CurrenciesFormItem>
