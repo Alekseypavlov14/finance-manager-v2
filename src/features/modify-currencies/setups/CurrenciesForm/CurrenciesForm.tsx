@@ -5,6 +5,7 @@ import { CurrenciesFormItemButton } from '../../components/CurrenciesFormItemBut
 import { CurrenciesFormButton } from '../../components/CurrenciesFormButton'
 import { CurrenciesFormInput } from '../../components/CurrenciesFormInput'
 import { CurrenciesFormItem } from '../../components/CurrenciesFormItem'
+import { useNotifications } from '@/app/notifications'
 import type { ChangeEvent } from 'react'
 import type { Id } from '@/shared/types/entity'
 import styles from './CurrenciesForm.module.css'
@@ -30,11 +31,13 @@ export function CurrenciesForm() {
     createDeleteCurrencyHandlerById, 
   } = useCurrenciesFormActions()
 
+  const { createWarningNotification } = useNotifications()
+
   function createComposedDeleteHandlerById(id: Id) {
     const deleteHandler = createDeleteCurrencyHandlerById(id)
 
     return () => {
-      if (!isDeletableById) return
+      if (!isDeletableById(id)) return createWarningNotification('This currency is in use')
       deleteHandler()
     }
   }

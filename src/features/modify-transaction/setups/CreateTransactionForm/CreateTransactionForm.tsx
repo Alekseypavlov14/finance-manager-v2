@@ -1,6 +1,7 @@
 import { TransactionForm, useTransactionFormData } from '@/features/transaction-form'
 import { useTransactionsActions } from '@/entities/transactions'
 import { useInitialFormData } from '../../hooks/use-initial-form-data'
+import { useNotifications } from '@/app/notifications'
 import { FormActions } from '@/shared/components/FormActions'
 import { Button } from 'antd'
 import styles from './CreateTransactionForm.module.css'
@@ -15,6 +16,8 @@ export function CreateTransactionForm({ onSave = () => {} }: CreateTransactionFo
 
   const initialData = useInitialFormData()
 
+  const { createSuccessNotification } = useNotifications()
+
   return (
     <div className={styles.CreateTransactionForm}>
       <TransactionForm initialTransactionData={initialData} />
@@ -23,6 +26,7 @@ export function CreateTransactionForm({ onSave = () => {} }: CreateTransactionFo
         <Button 
           onClick={() => {
             createTransaction(transactionFormData)
+            createSuccessNotification('Transaction is created')
             onSave()
           }}
           type='primary'
