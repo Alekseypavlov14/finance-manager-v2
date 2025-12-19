@@ -1,57 +1,92 @@
-import { modifyingIdsSelector, toggleModifyingIdSelector, useCurrenciesFormStore } from '../../currencies-form.store'
-import { currenciesSelector, useCurrenciesActions, useCurrenciesStore } from '@/entities/currency'
+import { creatingCurrenciesSelector, useCurrenciesFormStore } from '../../currencies-form.store'
+import { currenciesSelector, useCurrenciesStore } from '@/entities/currency'
+import { useCurrenciesFormActions } from '../../hooks/use-currencies-form-actions'
+import { CurrenciesFormItemButton } from '../../components/CurrenciesFormItemButton'
 import { CurrenciesFormButton } from '../../components/CurrenciesFormButton'
-import { defaultCurrencyCode } from '../../constants'
+import { CurrenciesFormInput } from '../../components/CurrenciesFormInput'
 import { CurrenciesFormItem } from '../../components/CurrenciesFormItem'
+import type { ChangeEvent } from 'react'
 import type { Id } from '@/shared/types/entity'
 import styles from './CurrenciesForm.module.css'
+import pencilIcon from '../../icons/pencil.svg'
+import checkIcon from '../../icons/check.svg'
+import crossIcon from '../../icons/cross.svg'
 
 export function CurrenciesForm() {
   const currencies = useCurrenciesStore(currenciesSelector)
+  const creatingCurrencies = useCurrenciesFormStore(creatingCurrenciesSelector)
 
   const { 
-    createCurrency, 
-    updateCurrencyById, 
-    deleteCurrencyById 
-  } = useCurrenciesActions()
+    isModifyingById,
+    isDeletableById,
 
-  const modifyingIds = useCurrenciesFormStore(modifyingIdsSelector)
-  const toggleModifyingId = useCurrenciesFormStore(toggleModifyingIdSelector)
+    createNewCurrency,
+    createUpdateCreatingCurrencyCodeByIndex,
+    createSaveNewCurrencyByIndexHandler,
+    createClearCreatingCurrencyByIndex,
 
-  function isModifying(id: Id) {
-    return modifyingIds.includes(id)
+    createToggleModifyingIdHandlerById,
+    createUpdateCurrencyCodeHandlerById,
+    createDeleteCurrencyHandlerById, 
+  } = useCurrenciesFormActions()
+
+  function createComposedDeleteHandlerById(id: Id) {
+    const deleteHandler = createDeleteCurrencyHandlerById(id)
+
+    return () => {
+      if (!isDeletableById) return
+      deleteHandler()
+    }
   }
-  function createUpdateCurrencyCodeHandlerById(id: Id) {
-    return (code: string) => updateCurrencyById(id, { code })
-  }
-  function createToggleModifyingIdHandlerById(id: Id) {
-    return () => toggleModifyingId(id)
-  }
-  function createDeleteTransactionHandlerById(id: Id) {
-    return () => deleteCurrencyById(id)
-  }
-  
-  function addNewCurrencyHandler() {
-    const newCurrency = createCurrency({ code: defaultCurrencyCode })
-    toggleModifyingId(newCurrency.id)
+
+  function createInputHandler(callback: (value: string) => void) {
+    return (e: ChangeEvent<HTMLInputElement>) => callback(e.target.value.trim())
   }
 
   return (
     <div className={styles.CurrenciesForm}>
+      <div className={styles.Title}>
+        Currencies
+      </div>
+      
       {currencies.map(currency => (
-        <CurrenciesFormItem 
-          currencyCode={currency.code}
-          updateCurrencyCode={createUpdateCurrencyCodeHandlerById(currency.id)}
+        <CurrenciesFormItem key={currency.id}>
+          <CurrenciesFormInput 
+            value={currency.code}
+            onChange={createInputHandler(createUpdateCurrencyCodeHandlerById(currency.id))}
+            disabled={!isModifyingById(currency.id)}
+          />
+  
+          {isModifyingById(currency.id) ? (
+            <CurrenciesFormItemButton onClick={createComposedDeleteHandlerById(currency.id)}>
+              <img src={crossIcon} />
+            </CurrenciesFormItemButton>
+          ) : null}
 
-          isModifying={isModifying(currency.id)}
-          onToggleModification={createToggleModifyingIdHandlerById(currency.id)}
-
-          onDelete={createDeleteTransactionHandlerById(currency.id)}
-          key={currency.id}
-        />
+          <CurrenciesFormItemButton onClick={createToggleModifyingIdHandlerById(currency.id)}>
+            <img src={isModifyingById(currency.id) ? checkIcon : pencilIcon} />
+          </CurrenciesFormItemButton>
+        </CurrenciesFormItem>
       ))}
 
-      <CurrenciesFormButton onClick={addNewCurrencyHandler}>
+      {creatingCurrencies.map((currencyData, index) => (
+        <CurrenciesFormItem key={index}>
+          <CurrenciesFormInput 
+            value={currencyData.code}
+            onChange={createInputHandler(createUpdateCreatingCurrencyCodeByIndex(index))}
+          />
+
+          <CurrenciesFormItemButton onClick={createSaveNewCurrencyByIndexHandler(index)}>
+            <img src={checkIcon} />
+          </CurrenciesFormItemButton>
+
+          <CurrenciesFormItemButton onClick={createClearCreatingCurrencyByIndex(index)}>
+            <img src={crossIcon} />
+          </CurrenciesFormItemButton>
+        </CurrenciesFormItem>
+      ))}
+
+      <CurrenciesFormButton onClick={createNewCurrency}>
         Add a new currency
       </CurrenciesFormButton>
     </div>

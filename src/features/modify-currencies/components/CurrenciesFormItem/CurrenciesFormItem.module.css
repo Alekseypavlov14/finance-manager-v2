@@ -5,21 +5,3 @@
   padding-bottom: 10px;
   border-bottom: 1px solid var(--grey-700);
 }
-
-.Button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 10px;
-  
-  background-color: var(--white);
-  border: 1px solid var(--grey-700);
-  border-radius: 5px;
- 
-  cursor: pointer;
-  outline: none;
-}
-
-.Control {
-  flex: 1 1 auto;
-}
