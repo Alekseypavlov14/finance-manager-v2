@@ -1,5 +1,6 @@
 import { currenciesSelector, useCurrenciesStore, type CurrencyCode } from '@/entities/currency'
 import { ratesSelector, useRatesStore } from '../rates.store'
+import type { TransactionMoney } from '@/entities/transactions'
 import type { Id } from '@/shared/types/entity'
 
 export function useCurrencyRates() {
@@ -27,10 +28,19 @@ export function useCurrencyRates() {
 
     return rates[currency.code] ?? 0
   }
+
+  function getMoneyAmountInUSD(money: TransactionMoney) {
+    const rate = getCurrencyRateById(money.currencyId)
+    if (!rate) return 0
+    
+    const amount = money.amount / rate
+    return amount
+  }
   
   return ({
     getRateByCurrencyPair,
     getCurrencyRate,
     getCurrencyRateById,
+    getMoneyAmountInUSD,
   })
 }

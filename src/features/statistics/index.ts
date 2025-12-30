@@ -1,5 +1,6 @@
 export * from './statistics.store'
 export * from './hooks/use-subscribe-on-transactions'
+export * from './hooks/use-statistics-approaches'
 
 export * from './setups/StatisticsCurrenciesChart'
 export * from './setups/StatisticsBalanceChart'

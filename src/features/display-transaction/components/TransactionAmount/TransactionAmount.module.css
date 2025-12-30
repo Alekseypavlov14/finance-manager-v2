@@ -2,4 +2,8 @@
   font-size: 16px;
   font-weight: 500;
   color: var(--black);
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

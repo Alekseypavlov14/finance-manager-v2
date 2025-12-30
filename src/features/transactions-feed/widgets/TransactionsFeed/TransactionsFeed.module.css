@@ -3,3 +3,17 @@
   flex-direction: column;
   gap: 40px;
 }
+
+.GroupBalance {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.GroupReceived {
+  font-weight: 500;
+  color: var(--green);
+}
+.GroupLost {
+  font-weight: 500;
+}

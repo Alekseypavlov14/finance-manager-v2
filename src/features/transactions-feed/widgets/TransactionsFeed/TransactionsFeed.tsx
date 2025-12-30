@@ -5,6 +5,7 @@ import { currentPageSelector, updateCurrentPageSelector } from '@/shared/utils/p
 import { groupingModeSelector, useTransactionsFeedStore } from '../../transactions-feed.store'
 import { mapTransactionGroupingModeToLabelStrategy } from '../../constants'
 import { useTransactionsFeedPaginationStore } from '../../transactions-feed-pagination.store'
+import { useTransactionsGroupBalance } from '../../hooks/use-transactions-group-balance'
 import { useSubscribeOnTransactions } from '../../hooks/use-subscribe-on-transactions'
 import { TransactionsGroupLabel } from '../../components/TransactionsGroupLabel'
 import { TransactionsGroupList } from '../../components/TransactionsGroupList'
@@ -23,7 +24,8 @@ export function TransactionsFeed() {
   const { navigateUpdateTransactionPage } = useNavigation()
 
   const transactionGroups = useTransactionsGroups()
-  const { formatAmountWithCurrency } = useDisplayTransactions()
+  const { getTransactionsGroupBalance } = useTransactionsGroupBalance()
+  const { formatAmountWithCurrency, formatAmountAsUSD } = useDisplayTransactions()
 
   const currentPage = useTransactionsFeedPaginationStore(currentPageSelector)
   const updateCurrentPage = useTransactionsFeedPaginationStore(updateCurrentPageSelector)
@@ -39,7 +41,14 @@ export function TransactionsFeed() {
       <TransactionsGroups>
         {transactionGroups.map((group, index) => (
           <TransactionsGroup key={index}>
-            <TransactionsGroupLabel>{labelFormatter(group.groupingMoment)}</TransactionsGroupLabel>
+            <TransactionsGroupLabel>
+              <div>{labelFormatter(group.groupingMoment)}</div>
+
+              <div className={styles.GroupBalance}>
+                <div className={styles.GroupReceived}>{formatAmountAsUSD(getTransactionsGroupBalance(group).received)}</div>
+                <div className={styles.GroupLost}>{formatAmountAsUSD(getTransactionsGroupBalance(group).lost)}</div>
+              </div>
+            </TransactionsGroupLabel>
 
             <TransactionsGroupList>
               {group.transactions.map(transaction => (

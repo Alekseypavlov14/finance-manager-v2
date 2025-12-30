@@ -3,19 +3,12 @@ import { useCurrencyRates } from '@/features/currencies-rates'
 import { sum } from '@/shared/utils/math'
 
 export function useStatisticApproaches() {
-  const { getCurrencyRateById } = useCurrencyRates()
+  const { getMoneyAmountInUSD } = useCurrencyRates()
 
   // returns total money amount in USD
   function getTransactionsTotalAmount(transactionsMoney: TransactionMoney[]) {
-    const moneyAmountInUSD = transactionsMoney.map(money => {
-      const rate = getCurrencyRateById(money.currencyId)
-      if (!rate) return 0
-      
-      const amount = money.amount / rate
-      return amount
-    })
-  
-    const totalAmountInUSD = sum(moneyAmountInUSD)
+    const moneyAmountsInUSD = transactionsMoney.map(getMoneyAmountInUSD)
+    const totalAmountInUSD = sum(moneyAmountsInUSD)
     return totalAmountInUSD
   }
 
