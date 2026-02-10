@@ -1,4 +1,6 @@
 export * from './statistics.store'
+
+export * from './hooks/use-initial-statistics-interval'
 export * from './hooks/use-subscribe-on-transactions'
 export * from './hooks/use-statistics-approaches'
 

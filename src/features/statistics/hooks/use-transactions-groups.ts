@@ -1,17 +1,17 @@
-import { intervalEndSelector, intervalStartSelector, intervalStepSelector, transactionsSelector, useStatisticsStore } from '../statistics.store'
-import { groupTransactionsByStatisticsFrame } from '../utils/group-transactions-by-statistics-frame'
+import { intervalEndSelector, intervalStartSelector, intervalSelector, transactionsSelector, useStatisticsStore } from '../statistics.store'
+import { groupTransactionsByStatisticsInterval } from '../utils/group-transactions-by-statistics-interval'
 
 export function useTransactionsGroups() {
   const transactions = useStatisticsStore(transactionsSelector)
   const intervalStart = useStatisticsStore(intervalStartSelector)
   const intervalEnd = useStatisticsStore(intervalEndSelector)
-  const intervalStep = useStatisticsStore(intervalStepSelector)
+  const interval = useStatisticsStore(intervalSelector)
 
-  const groups = groupTransactionsByStatisticsFrame({
+  const groups = groupTransactionsByStatisticsInterval({
     transactions: transactions,
     start: intervalStart,
     end: intervalEnd,
-    step: intervalStep
+    interval: interval
   })
 
   return groups

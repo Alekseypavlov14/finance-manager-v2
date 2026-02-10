@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useInitialStatisticsInterval } from '@/features/statistics'
 import { useTransactionsPersistence } from '@/entities/transactions'
 import { useCurrenciesPersistence } from '@/entities/currency'
 import { useRequestCurrencyRates } from '@/features/currencies-rates'
@@ -13,8 +14,9 @@ export function StateLoaderLayout({ children }: StateLoaderLayoutProps) {
 
   useTransactionsPersistence()
   useCurrenciesPersistence()
-
   useSettingsPersistence()
+
+  useInitialStatisticsInterval()
 
   return children
 }
