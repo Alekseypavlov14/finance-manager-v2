@@ -4,6 +4,7 @@ import { currentPageSelector, updateTotalPagesSelector } from '@/shared/utils/pa
 import { transactionsSelector, useTransactionsStore } from '@/entities/transactions'
 import { useTransactionsFeedPaginationStore } from '../transactions-feed-pagination.store'
 import { useEffect } from 'react'
+import { sortTransactionsByDate } from '../utils/sort-transactions-by-date'
 
 export function useSubscribeOnTransactions() {
   const transactions = useTransactionsStore(transactionsSelector)
@@ -15,7 +16,8 @@ export function useSubscribeOnTransactions() {
   const updateDisplayedTransactions = useTransactionsFeedStore(updateDisplayedTransactionsSelector)
 
   useEffect(() => {
-    updateDisplayedTransactions(transactions.slice(currentPage * displayTransactionsAmount, (currentPage + 1) * displayTransactionsAmount))
+    const sortedTransactions = sortTransactionsByDate(transactions)
+    updateDisplayedTransactions(sortedTransactions.slice(currentPage * displayTransactionsAmount, (currentPage + 1) * displayTransactionsAmount))
   }, [transactions, currentPage, displayTransactionsAmount])
 
   useEffect(() => {
