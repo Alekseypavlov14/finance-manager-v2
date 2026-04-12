@@ -11,7 +11,7 @@ export function useTransactionsGroups() {
     transactions: transactions,
     start: intervalStart,
     end: intervalEnd,
-    interval: interval
+    interval: interval,
   })
 
   return groups

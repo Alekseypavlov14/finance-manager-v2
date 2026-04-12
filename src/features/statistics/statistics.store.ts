@@ -1,6 +1,6 @@
 import type { StatisticsGroupInterval } from './types/statistics-group-interval'
-import type { TransactionEntity } from '@/entities/transactions'
 import { defaultStatisticsInterval } from './constants'
+import type { TransactionEntity } from '@/entities/transactions'
 import { create } from 'zustand'
 
 export interface StatisticsState {

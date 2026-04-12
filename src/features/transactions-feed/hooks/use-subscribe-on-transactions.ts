@@ -3,8 +3,8 @@ import { displayTransactionsAmountSelector, useSettingsStore } from '@/features/
 import { currentPageSelector, updateTotalPagesSelector } from '@/shared/utils/pagination'
 import { transactionsSelector, useTransactionsStore } from '@/entities/transactions'
 import { useTransactionsFeedPaginationStore } from '../transactions-feed-pagination.store'
-import { useEffect } from 'react'
 import { sortTransactionsByDate } from '../utils/sort-transactions-by-date'
+import { useEffect } from 'react'
 
 export function useSubscribeOnTransactions() {
   const transactions = useTransactionsStore(transactionsSelector)

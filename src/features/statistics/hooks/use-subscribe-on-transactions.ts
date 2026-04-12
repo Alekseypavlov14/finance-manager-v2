@@ -13,5 +13,5 @@ export function useSubscribeOnTransactions() {
   useEffect(() => {
     const range = new Range({ min: intervalStart, max: intervalEnd })
     updateTransactions(transactions.filter(transaction => range.containsValue(transaction.date)))
-  }, [transactions, intervalStart, intervalEnd, ])
+  }, [transactions, intervalStart, intervalEnd])
 }

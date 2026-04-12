@@ -1,4 +1,4 @@
-import { StatisticsBalanceChart, StatisticsBlocks, StatisticsCurrenciesChart, StatisticsExpensesChart, StatisticsIncomesChart, useSubscribeOnTransactions } from '@/features/statistics'
+import { StatisticsBalanceChart, StatisticsBlocks, StatisticsCurrenciesChart, StatisticsExpensesChart, StatisticsIncomesChart, StatisticsSettings, useSubscribeOnTransactions } from '@/features/statistics'
 import { CreateTransactionButton } from '@/features/modify-transaction'
 import { RatesCalculator } from '@/features/rates-calculator'
 import { AppBurgerButton } from '@/widgets/AppBurgerButton'
@@ -43,6 +43,10 @@ export function HomePage() {
 
               <Palette round block>
                 <StatisticsExpensesChart />
+              </Palette>
+
+              <Palette round block>
+                <StatisticsSettings />
               </Palette>
 
               <Palette round block>
